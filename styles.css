@@ -73,6 +73,7 @@ body {
 
 #todo-list li {
     /* 크기와 여백 */
+    display: flex;
     height: fit-content;
     padding: 10px;
     margin-bottom: 10px;
@@ -82,12 +83,22 @@ body {
     background-color: #FFFFFF;
 }
 
-/* #todo-list li div {
+#todo-list li div {
+    flex: 1;
+    padding: 0 10px;
+    text-align: left;
+    word-break: break-all;
+    word-wrap: break-word;
+}
 
-} */
-
-#todo-list li form {
-
+#todo-list li form input {
+    height: 2rem;
+    width: 100%;
+    padding: 0 7px;
+    box-sizing: border-box;
+    border: 1.5px solid #92B4EC;
+    border-radius: 10px;
+    outline: none;
 }
 
 #todo-list li button {
