@@ -12,7 +12,7 @@ todoData.map(printTodo);
 
 todoForm.addEventListener('submit', handleTodoSubmit);
 
-// Functions
+// Event Handlers
 
 function handleTodoSubmit(event) {
     event.preventDefault(); // 새로고침 방지
@@ -22,19 +22,37 @@ function handleTodoSubmit(event) {
     }
     todoInput.value = '';   // 입력창 초기화
     printTodo(newTodo);
-    saveTodo(newTodo);
+    addTodo(newTodo);
 }
+
+function handleTodoDelete(event) {
+    const targetId = event.target.parentElement.id;
+    const li = event.target.parentElement; // 삭제할 li
+    li.remove();    // 화면에서 삭제하기
+    todoData = todoData.filter((todo) => { return (todo.id !== parseInt(targetId)); });
+    saveTodo();
+}
+
+// Functions
 
 function printTodo (newTodo) {
     const li = document.createElement('li');
     const span = document.createElement('span');
+    const button = document.createElement('button');
+    button.addEventListener('click', handleTodoDelete);
     li.id = newTodo.id;
     span.innerText = newTodo.text;
+    button.innerText = '삭제';
     li.appendChild(span);
+    li.appendChild(button);
     todoList.appendChild(li);
 }
 
-function saveTodo (newTodo) {
+function addTodo (newTodo) {
     todoData.push(newTodo);
+    saveTodo();
+}
+
+function saveTodo () {
     localStorage.setItem(TODO_KEY, JSON.stringify(todoData));
 }
