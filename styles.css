@@ -2,82 +2,63 @@ html {
     height: 100vh;
 }
 body {
-    /* 객체의 노출여부와 표현방식 */
     display: flex;
-    /* 크기와 여백 */
     height: 100%;
     margin: 0;
-    /* 윤곽과 배경 */
     background: linear-gradient(45deg, #6190E8, #A7BFE8);
-    /* 내용 */
     justify-content: center;
     align-items: center;
 }
 
 #todo-wrapper {
-    /* 객체의 노출여부와 표현방식 */
     display: flex;
     flex-direction: column;
-    /* 크기와 여백 */
     width: 500px;
     height: 550px;
     padding: 30px;
-    /* 윤곽과 배경 */
     background: #F5F9FC;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    /* 글자와 정렬 */
     color: #333333;
 }
 
 #todo-wrapper hr {
-    /* 크기와 여백 */
     width: 100%;
     height: 2px;
     margin: 20px 0;
-    /* 윤곽과 배경 */
     border: 0;
     background-color: #FFD24C;
 }
 
 #todo-form {
-    /* 크기와 여백 */
     width: 100%;
 }
 
 #todo-form input {
-    /* 크기와 여백 */
     height: 2rem;
     width: 100%;
     padding: 0 7px;
     box-sizing: border-box;
-    /* 윤곽과 배경 */
     border: 1.5px solid #92B4EC;
     border-radius: 10px;
     outline: none;
 }
 
 #todo-list {
-    /* 객체의 노출여부와 표현방식 */
     flex: 1;
-    /* 크기와 여백 */
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
-    /* 리스트 스타일 */
     list-style: none;
-
     overflow: auto;
 }
 
 #todo-list li {
-    /* 크기와 여백 */
     display: flex;
     height: fit-content;
     padding: 10px;
     margin-bottom: 10px;
-    /* 윤곽과 배경 */
     border: 1.5px solid #6190E8;
     border-radius: 10px;
     background-color: #FFFFFF;
@@ -102,10 +83,8 @@ body {
 }
 
 #todo-list li button {
-    /* 윤곽과 배경 */
     border: none;
     background: none;
-    /* 글자와 정렬 */
     color: #92B4EC;
     text-align: right;
 }

@@ -18,7 +18,7 @@ function handleTodoSubmit(event) {
         id: Date.now(),     // 현재 시간의 밀리초를 id로 사용
         text: todoInput.value,
     }
-    todoInput.value = '';   // 입력창 초기화
+    todoInput.value = '';
     printTodo(newTodo);
     addTodo(newTodo);
 }
@@ -41,7 +41,7 @@ function handleTodoUpdate(event) {
     const updateInput = document.createElement('input');
     updateInput.type = 'text';
     updateInput.value = div.innerText;
-    div.innerText = '';                     // div 안의 내용 삭제
+    div.innerText = '';
     div.appendChild(form);
     form.appendChild(updateInput);
 }
