@@ -34,7 +34,6 @@ function handleTodoDelete(event) {
 function handleTodoUpdate(event) {
     const li = event.target.parentElement;  // 수정할 Todo
     const div = li.querySelector('div');
-    div.innerText = '';                     // div 안의 내용 삭제
     const updateButton = li.querySelector('.update');
     updateButton.disabled = true;           //  수정 중 수정 이벤트 발생 차단
     const form = document.createElement('form');
@@ -42,6 +41,7 @@ function handleTodoUpdate(event) {
     const updateInput = document.createElement('input');
     updateInput.type = 'text';
     updateInput.value = div.innerText;
+    div.innerText = '';                     // div 안의 내용 삭제
     div.appendChild(form);
     form.appendChild(updateInput);
 }
