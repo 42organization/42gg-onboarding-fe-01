@@ -8,8 +8,6 @@ const TODO_KEY = 'todoData'
 let todoData = JSON.parse(localStorage.getItem(TODO_KEY)) || [];
 todoData.map(printTodo);
 
-// Event Listeners
-
 todoForm.addEventListener('submit', handleTodoSubmit);
 
 // Event Handlers
@@ -26,10 +24,44 @@ function handleTodoSubmit(event) {
 }
 
 function handleTodoDelete(event) {
-    const targetId = event.target.parentElement.id;
+    const targetId = parseInt(event.target.parentElement.id);
     const li = event.target.parentElement; // 삭제할 li
-    li.remove();    // 화면에서 삭제하기
-    todoData = todoData.filter((todo) => { return (todo.id !== parseInt(targetId)); });
+    li.remove();
+    todoData = todoData.filter((todo) => { return (todo.id !== targetId); });
+    saveTodo();
+}
+
+function handleTodoUpdate(event) {
+    const li = event.target.parentElement;  // 수정할 Todo
+    const div = li.querySelector('div');
+    div.innerText = '';                     // div 안의 내용 삭제
+    const updateButton = li.querySelector('.update');
+    updateButton.disabled = true;           //  수정 중 수정 이벤트 발생 차단
+    const form = document.createElement('form');
+    form.addEventListener('submit', handleChangedTodoSubmit);
+    const updateInput = document.createElement('input');
+    updateInput.type = 'text';
+    updateInput.value = div.innerText;
+    div.appendChild(form);
+    form.appendChild(updateInput);
+}
+
+function handleChangedTodoSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const todoId = parseInt(form.parentElement.parentElement.id);   // 수정할 Todo의 id
+    const div = form.parentElement;                                 // Form 부모 div
+    const updateInput = form.querySelector('input').value;          // 수정할 내용
+    const updateButton = div.parentElement.querySelector('.update');
+    updateButton.disabled = false;
+    div.innerText = updateInput;
+    form.remove();
+    todoData = todoData.map((todo) => {
+        if (todo.id === todoId) {
+            todo.text = updateInput;
+        }
+        return todo;
+    }); // 수정한 내용 반영
     saveTodo();
 }
 
@@ -37,14 +69,21 @@ function handleTodoDelete(event) {
 
 function printTodo (newTodo) {
     const li = document.createElement('li');
-    const span = document.createElement('span');
-    const button = document.createElement('button');
-    button.addEventListener('click', handleTodoDelete);
     li.id = newTodo.id;
-    span.innerText = newTodo.text;
-    button.innerText = '삭제';
-    li.appendChild(span);
-    li.appendChild(button);
+    const div = document.createElement('div');
+    const updateButton = document.createElement('button');
+    updateButton.addEventListener('click', handleTodoUpdate);
+    updateButton.className = 'update';
+    updateButton.innerText = '수정';
+    const deleteButton = document.createElement('button');
+    deleteButton.addEventListener('click', handleTodoDelete);
+    deleteButton.className = 'delete';
+    deleteButton.innerText = '삭제';
+    div.innerText = newTodo.text;
+
+    li.appendChild(div);
+    li.appendChild(updateButton);
+    li.appendChild(deleteButton);
     todoList.appendChild(li);
 }
 
