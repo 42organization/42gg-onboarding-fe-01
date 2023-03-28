@@ -35,7 +35,9 @@ function handleTodoUpdate(event) {
     const li = event.target.parentElement;  // 수정할 Todo
     const div = li.querySelector('div');
     const updateButton = li.querySelector('.update');
-    updateButton.disabled = true;           //  수정 중 수정 이벤트 발생 차단
+    updateButton.innerText = '취소';
+    updateButton.removeEventListener('click', handleTodoUpdate);
+    updateButton.addEventListener('click', handleTodoUpdateCancel);
     const form = document.createElement('form');
     form.addEventListener('submit', handleChangedTodoSubmit);
     const updateInput = document.createElement('input');
@@ -53,7 +55,9 @@ function handleChangedTodoSubmit(event) {
     const div = form.parentElement;                                 // Form 부모 div
     const updateInput = form.querySelector('input').value;          // 수정할 내용
     const updateButton = div.parentElement.querySelector('.update');
-    updateButton.disabled = false;
+    updateButton.innerText = '수정';
+    updateButton.removeEventListener('click', handleTodoUpdateCancel);
+    updateButton.addEventListener('click', handleTodoUpdate);
     div.innerText = updateInput;
     form.remove();
     todoData = todoData.map((todo) => {
@@ -63,6 +67,20 @@ function handleChangedTodoSubmit(event) {
         return todo;
     }); // 수정한 내용 반영
     saveTodo();
+}
+
+function handleTodoUpdateCancel(event) {
+    const li = event.target.parentElement;  // 수정할 Todo
+    const id = parseInt(li.id);
+    const div = li.querySelector('div');
+    const form = div.querySelector('form');
+    form.remove();
+    const updateButton = li.querySelector('.update');
+    updateButton.innerText = '수정';
+    updateButton.removeEventListener('click', handleTodoUpdateCancel);
+    updateButton.addEventListener('click', handleTodoUpdate);
+    const oldTodo = todoData.find((todo) => todo.id === id);
+    div.innerText = oldTodo.text;
 }
 
 // Functions
