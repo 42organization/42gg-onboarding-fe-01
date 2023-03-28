@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <link rel="stylesheet" href="./styles.css">
     <title>TODO</title>
 </head>
 <body>
-    <form id="todo-form">
-        <input id="todo-input" placeholder="TODO 추가하기" type="text" required>
-    </form>
-    <ul id="todo-list">
-        <!-- Dynamically added -->
-    </ul>
+    <div id="todo-wrapper">
+        <form id="todo-form">
+            <input id="todo-input" autocomplete="off" placeholder="TODO 추가하기" type="text" required>
+        </form>
+        <hr />
+        <ul id="todo-list">
+            <!-- Dynamically added -->
+        </ul>
+    </div>
     <script src="./todo.js"></script>
 </body>
 </html>
