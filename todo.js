@@ -17,6 +17,7 @@ function handleTodoSubmit(event) {
     const newTodo = {
         id: Date.now(),     // 현재 시간의 밀리초를 id로 사용
         text: todoInput.value,
+        completed: false,
     }
     todoInput.value = '';
     printTodo(newTodo);
@@ -83,12 +84,29 @@ function handleTodoUpdateCancel(event) {
     div.innerText = oldTodo.text;
 }
 
+function handleTodoClick(event) {
+    const li = event.target.parentElement;
+    const id = parseInt(li.id);
+    let completed = true;
+    todoData.map((todo) => {
+        if (todo.id === id) {
+            todo.completed = todo.completed === true ? false : true;
+            completed = todo.completed;
+        }
+        return todo;
+    });
+    li.className = completed ? 'completed' : 'not-completed';
+    saveTodo();
+}
+
 // Functions
 
 function printTodo (newTodo) {
     const li = document.createElement('li');
     li.id = newTodo.id;
+    li.className = newTodo.completed === true ? 'completed' : 'not-completed';
     const div = document.createElement('div');
+    div.addEventListener('click', handleTodoClick);
     const updateButton = document.createElement('button');
     updateButton.addEventListener('click', handleTodoUpdate);
     updateButton.className = 'update';

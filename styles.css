@@ -82,7 +82,7 @@ h1 {
     background-color: #FFFFFF;
 }
 
-#todo-list li div {
+#todo-list li > div {
     flex: 1;
     padding: 0 10px;
     text-align: left;
@@ -90,7 +90,17 @@ h1 {
     word-wrap: break-word;
 }
 
-#todo-list li form input {
+#todo-list li.completed {
+    border: 1.5px solid #FFD24C;
+    background-color: #F5F9FC;
+}
+
+#todo-list li.completed > div {
+    text-decoration: line-through;
+    color: #92B4EC;
+}
+
+#todo-list li > form > input {
     height: 2rem;
     width: 100%;
     padding: 0 7px;
@@ -100,14 +110,14 @@ h1 {
     outline: none;
 }
 
-#todo-list li button {
+#todo-list li > button {
     border: none;
     background: none;
     color: #92B4EC;
     text-align: right;
 }
 
-#todo-list li button:hover {
+#todo-list li > button:hover {
     color: #6190E8;
     cursor: pointer
 }
