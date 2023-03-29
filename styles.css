@@ -1,0 +1,123 @@
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+html {
+    height: 100vh;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(45deg, #6190E8, #A7BFE8);
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Lilita One', sans-serif, cursive;
+    font-size: 3rem;
+    color: #F5F9FC;
+    margin: 0 0 10px 0;
+}
+
+#todo-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 400px;
+    padding: 30px;
+    background: #F5F9FC;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #333333;
+}
+
+@media (max-height: 500px) {
+    #todo-wrapper {
+        height: 300px;
+    }
+}
+
+#todo-wrapper hr {
+    width: 100%;
+    height: 2px;
+    margin: 20px 0;
+    border: 0;
+    background-color: #FFD24C;
+}
+
+#todo-form {
+    width: 100%;
+}
+
+#todo-form input {
+    height: 2rem;
+    width: 100%;
+    padding: 0 7px;
+    box-sizing: border-box;
+    border: 1.5px solid #92B4EC;
+    border-radius: 10px;
+    outline: none;
+}
+
+#todo-list {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: auto;
+}
+
+#todo-list li {
+    display: flex;
+    height: fit-content;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1.5px solid #6190E8;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+#todo-list li > div {
+    flex: 1;
+    padding: 0 10px;
+    text-align: left;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+#todo-list li.completed {
+    border: 1.5px solid #FFD24C;
+    background-color: #F5F9FC;
+}
+
+#todo-list li.completed > div {
+    text-decoration: line-through;
+    color: #92B4EC;
+}
+
+#todo-list li form > input {
+    height: 2rem;
+    width: 100%;
+    padding: 0 7px;
+    box-sizing: border-box;
+    border: 1.5px solid #92B4EC;
+    border-radius: 10px;
+    outline: none;
+}
+
+#todo-list li > button {
+    border: none;
+    background: none;
+    color: #92B4EC;
+    text-align: right;
+}
+
+#todo-list li > button:hover {
+    color: #6190E8;
+    cursor: pointer
+}

@@ -1,25 +1,23 @@
-# 42gg 프론트엔드 온보딩 1단계
+# 42gg 프론트엔드 온보딩 1단계 
 
-## 공통 조건
+## 📝 ToDo List 만들기
 
-- 온보딩 프로젝트는 개인 계정으로 fork하여 진행하고 PR로 제출합니다.
-- git / github / code 컨벤션은 42gg notion에 있는 자료를 적극 반영합니다.
-- 기본 기능 외 추가 기능, 디자인 구현은 자유입니다.
-- 최종 제출품에는 README 작성이 되있어야 합니다.([예시](https://github.com/42organization/42gg.client/blob/main/README.md))
+[⭐️ 배포 페이지 ⭐️](https://verysimpletodolist.netlify.app/)
 
-## todo list 만들기
+## ✨ 주요 기능 소개
 
-- (필수) Javascript, HTML, CSS
-- (필수) todo 생성(Create), 조회(Read) 기능 구현하기 (새로고침 고려 X)
-- (선택) todo 수정(Update), 삭제(Delete) 기능 구현하기 (새로고침 고려 X)
-- (선택) 디자인 적용하기
-- (선택) 무료로 배포하기
+### ✏️ 할 일을 추가할 수 있습니다
 
-## 참고
+<img width="40%" alt="add_todo_1" src="https://user-images.githubusercontent.com/57761286/228439216-82f423e9-c84a-4361-8e28-608522ca0e92.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width="40%" alt="add_todo_2" src="https://user-images.githubusercontent.com/57761286/228439232-5b2b5ed7-3e09-4368-af9d-e469ac3481e0.png">
 
-- 데이터 관리는 하단의 방식 중 하나 선택하시면 됩니다.
-  - localstorage
-  - local server(예. [https://github.com/shal0mdave/todo-api.git](https://github.com/shal0mdave/todo-api.git), lowdb)
-  - mock api(예. [https://dummyjson.com/](https://dummyjson.com/))
-- todo list를 구현하기 위해 필요한 기능들을 미리 생각(그려보고)해보고, 구현해보세요.
-- 궁금한 사항은 issue에 등록해주세요.
+### ✏️ 할 일을 삭제할 수 있습니다
+
+<img width="40%" alt="SimpleTodo_ScreenShoot_7" src="https://user-images.githubusercontent.com/57761286/228441771-4c83b9ae-6625-4ff3-9693-bca3a2aed86c.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width="40%" alt="SimpleTodo_ScreenShoot_8" src="https://user-images.githubusercontent.com/57761286/228441788-087d1429-a4d8-4d46-8109-b2aefbd483a2.png">
+
+### ✏️ 할 일을 수정할 수 있습니다
+
+<img width="40%" alt="update_todo_1" src="https://user-images.githubusercontent.com/57761286/228439558-fb3ac233-dadf-47fc-9a4f-a7a9e96e999d.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width="40%" alt="update_todo_2" src="https://user-images.githubusercontent.com/57761286/228439549-f6ec3208-9439-4197-8cc8-711c94ec81ef.png">
+
+### ✏️ 완료한 할 일은 클릭하여 완료표시할 수 있습니다
+
+<img width="40%" alt="complete_todo_1" src="https://user-images.githubusercontent.com/57761286/228440361-16b07f81-9e02-4314-8719-ee2dda325fe2.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width="40%" alt="complete_todo_2" src="https://user-images.githubusercontent.com/57761286/228440357-0ae16e3c-5334-4db0-8c4e-c9a913d55f54.png">
