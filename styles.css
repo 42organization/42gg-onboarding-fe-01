@@ -1,8 +1,13 @@
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 html {
     height: 100vh;
 }
 body {
     display: flex;
+    flex-direction: column;
     height: 100%;
     margin: 0;
     background: linear-gradient(45deg, #6190E8, #A7BFE8);
@@ -10,16 +15,29 @@ body {
     align-items: center;
 }
 
+h1 {
+    font-family: 'Lilita One', sans-serif, cursive;
+    font-size: 3rem;
+    color: #F5F9FC;
+    margin: 0 0 10px 0;
+}
+
 #todo-wrapper {
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 550px;
+    height: 400px;
     padding: 30px;
     background: #F5F9FC;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     color: #333333;
+}
+
+@media (max-height: 500px) {
+    #todo-wrapper {
+        height: 300px;
+    }
 }
 
 #todo-wrapper hr {
