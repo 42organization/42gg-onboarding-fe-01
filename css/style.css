@@ -1,0 +1,169 @@
+html {
+	height: 100%;
+}
+
+body {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: #F5F5F5;
+    min-height: 100%;
+}
+
+.todo-wrapper {
+    justify-content: center;
+    margin-top: 3rem;
+    min-width: 600px;
+}
+
+.todo-title {
+    padding: 2rem;
+    text-align: center;
+    color: black;
+    font-size: 5rem;
+}
+
+.todo-box {
+    background-color: #FCF4B4;
+    border: 1px solid #FCF4B4;
+}
+
+.black-box {
+    display: flex;
+    flex-wrap: nowrap;
+     flex-direction: row;
+     height: 3rem;
+    border-bottom: 1px solid #ddd;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(30, 30, 30);
+}
+
+.todo-input {
+    background-color: #FCF4B4;
+}
+
+.todo-input-box {
+    display: flex;
+    flex-wrap: nowrap;
+     flex-direction: row;
+    height: 3rem;
+    border-bottom: 1px solid #ddd;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    background-color: transparent;
+    border: 0;
+}
+
+
+.todo-input {
+    width: 80%;
+    text-align: center;
+    border: 0;
+    outline: none;
+    font-size: 1.3rem;
+}
+
+.todo-item {
+     position: relative;
+     display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.todo-item:hover.delBtn {
+    opacity: 1;
+}
+
+.checkbox {
+    min-width: none;
+    min-height: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.5rem 0.5rem;
+    border-radius: 100%;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.checkbox:after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 205%;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    right: -80%;
+    transform: translate(-50%, -50%);
+}
+
+.checkbox::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 205%;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    right: -60%;
+    transform: translate(-50%, -50%);
+}
+
+.todo-item.checked .checkbox{
+    border: 1px solid darkgray;
+    color: green;
+}
+
+.todo {
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+.todo-item.checked .todo{
+    font-style: italic;
+    text-decoration: line-through;
+    color: lightgray;
+}
+
+.delBtn {
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.todo-bottom {
+    height: 3rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.edit-input {
+    position: absolute;
+    background: darkgray;
+    left: 0;
+    top: 0;
+    width: 590px;
+    height: 2.8rem;
+    margin: 0;
+}
