@@ -52,15 +52,21 @@ const onDbclickTodo = (e, todoId) => {
 	inputElem.value = inputText;
 	inputElem.classList.add('edit-input');
 	inputElem.setAttribute('maxlength', '15');
+/* 	console.log(e.target);
+	console.log(e.target.innerText);
+	console.log(todoItem);
+	console.log(inputElem); */
 
 	inputElem.addEventListener('keypress', (e) => {
 		if(e.key === 'Enter' && e.target.value !== '') {
 			updateTodo(e.target.value, todoId);
+			document.body.removeEventListener('click', onClickBody);
 		}
 	})
 	const onClickBody = (e) => {
 		if (e.target !== inputElem) {
 			todoItem.removeChild(inputElem);
+			document.body.removeEventListener('click', onClickBody);
 		}
 	}
 	document.body.addEventListener('click', onClickBody);
