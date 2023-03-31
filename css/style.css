@@ -34,9 +34,17 @@ ul {
 
 .black-box {
     height: 3rem;
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(10, 17, 32);
+    text-align:end;
 }
 
+.black-box-text {
+    font-family: 'Dancing Script', cursive;
+    margin:3%;
+    line-height: 4rem;
+    text-align: end;
+    color: white;
+}
 .todo-input {
     background-color: #FCF4B4;
      text-align: left;
