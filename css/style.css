@@ -63,12 +63,17 @@ ul {
     font-size: 1.3rem;
 }
 
+.todo-list {
+    height: 600px;
+    border-bottom: 1px solid #ddd;
+    overflow: auto;
+}
+
 .todo-item {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-/*     justify-content: space-between; */
     align-items: center;
     height: 3rem;
     border-bottom: 1px solid #ddd;

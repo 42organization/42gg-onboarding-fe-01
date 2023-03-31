@@ -27,7 +27,6 @@ const completeTodo = (todoId) => {
 	setTodos(newTodos);
 	paintTodos();
 	saveToDos();
-	console.log(newTodos);
 }
 
 const deleteToDo = (todoId) => {
@@ -52,10 +51,6 @@ const onDbclickTodo = (e, todoId) => {
 	inputElem.value = inputText;
 	inputElem.classList.add('edit-input');
 	inputElem.setAttribute('maxlength', '15');
-/* 	console.log(e.target);
-	console.log(e.target.innerText);
-	console.log(todoItem);
-	console.log(inputElem); */
 
 	inputElem.addEventListener('keypress', (e) => {
 		if(e.key === 'Enter' && e.target.value !== '') {
@@ -124,7 +119,6 @@ const paintTodos = () => {
 const init = () => {
 	todoInput.addEventListener('keypress', (e) =>{
 		if (e.key === 'Enter' && e.target.value !== ''){
-			console.log(e.target.value);
 			appendTodos(e.target.value); 
 			todoInput.value = '';
 		}
@@ -135,7 +129,6 @@ const savedToDos = localStorage.getItem(TODOS_KEY);
 
 if(savedToDos !== null) {
 	const parsedToDos = JSON.parse(savedToDos);
-	console.log(parsedToDos);
 	todos = parsedToDos;
 	parsedToDos.forEach(paintTodos);
 }
