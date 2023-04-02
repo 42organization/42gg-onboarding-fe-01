@@ -6,15 +6,15 @@ const TODOS_KEY = "todos";
 let todos = [];
 let id = 0;
 
-const setTodos = (newTodos) => {
+function setTodos(newTodos) {
 	todos = newTodos;
 }
 
-const getAllTodos = () => {
+function getAllTodos() {
 	return todos;
 }
 
-const appendTodos = (text) => {
+function appendTodos(text) {
 	const newId = Date.now();
 	const newTodos = getAllTodos().concat({id: newId, isCompleted: false, content: text});
 	setTodos(newTodos);
@@ -22,44 +22,47 @@ const appendTodos = (text) => {
 	saveToDos();
 }
 
-const completeTodo = (todoId) => {
+function completeTodo(todoId) {
 	const newTodos = getAllTodos().map(todo => todo.id === todoId ? {...todo, isCompleted: !todo.isCompleted} : todo);
 	setTodos(newTodos);
 	paintTodos();
 	saveToDos();
 }
 
-const deleteToDo = (todoId) => {
+function deleteToDo(todoId) {
 	const newTodos = getAllTodos().filter(todo => todo.id !== todoId);
 	setTodos(newTodos);
 	paintTodos();
 	saveToDos();
 }
 
-const updateTodo = (text, todoId) => {
+function updateTodo(text, todoId) {
 	const newTodos = getAllTodos().map(todo => todo.id === todoId ? ({...todo, content: text}) : todo);
 	setTodos(newTodos);
 	paintTodos();
 	saveToDos();
 }
 
-const onDbclickTodo = (e, todoId) => {
-	const todoElem = e.target;
-	const inputText = e.target.innerText;
+function onDbclickTodo(event, todoId) {
+	const todoElem = event.target;
+	const inputText = event.target.innerText;
 	const todoItem = todoElem.parentNode;
 	const inputElem = document.createElement('input');
 	inputElem.value = inputText;
 	inputElem.classList.add('edit-input');
 	inputElem.setAttribute('maxlength', '15');
 
-	inputElem.addEventListener('keypress', (e) => {
-		if(e.key === 'Enter' && e.target.value !== '') {
-			updateTodo(e.target.value, todoId);
+	console.log(event.target.innerText);
+
+	inputElem.addEventListener('keypress', (event)=>{
+		if(event.key === 'Enter' && event.target.value !== '') {
+			updateTodo(event.target.value, todoId);
 			document.body.removeEventListener('click', onClickBody);
 		}
 	})
-	const onClickBody = (e) => {
-		if (e.target !== inputElem) {
+
+	function onClickBody(event) {
+		if (event.target !== inputElem) {
 			todoItem.removeChild(inputElem);
 			document.body.removeEventListener('click', onClickBody);
 		}
@@ -68,18 +71,11 @@ const onDbclickTodo = (e, todoId) => {
 	todoItem.appendChild(inputElem);
 }
 
-const saveToDos = () => {
+function saveToDos() {
 	localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
-const EachTodo = () => {
-	todoList.innerHTML = '';
-	const allTodos = getAllTodos();
-
-	allTodos.forEach(paintTodos(todo));
-}
-
-const paintTodos = () => {
+function paintTodos() {
 	todoList.innerHTML = '';
 	const allTodos = getAllTodos();
 
@@ -107,7 +103,6 @@ const paintTodos = () => {
 			todoItem.classList.add('checked');
 			checkboxElem.innerText = '✔';
 		}
-
 		todoItem.appendChild(checkboxElem);
 		todoItem.appendChild(todoElem);
 		todoItem.appendChild(delBtn);
@@ -116,10 +111,10 @@ const paintTodos = () => {
 	})
 }
 
-const init = () => {
-	todoInput.addEventListener('keypress', (e) =>{
-		if (e.key === 'Enter' && e.target.value !== ''){
-			appendTodos(e.target.value); 
+function init() {
+	todoInput.addEventListener('keypress', (event) =>{
+		if (event.key === 'Enter' && event.target.value !== ''){
+			appendTodos(event.target.value); 
 			todoInput.value = '';
 		}
 	})
