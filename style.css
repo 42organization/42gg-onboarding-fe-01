@@ -1,0 +1,135 @@
+body {
+    background-color: #282828;
+}
+
+.clock {
+    color: white;
+    font-size: 2rem;
+    padding-left: 1rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 2 2rem;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title h1 {
+    color:white;
+    font-size: 4rem;
+}
+
+#todo-input {
+    background-color: #505050;
+    margin-right: 20%;
+    margin-left: 20%;
+    border-radius: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#todo-input > input[type=text]{
+    background-color: #505050;
+    font-size: 2rem;
+    border: 0rem;
+    color:white;
+    width: 70%;
+}
+
+
+#todo-input > input::placeholder{
+    display: flex;
+    font-size: 2rem;
+    color: white;
+    justify-content: center;
+    text-align: center;
+}
+
+#todo-input > input:focus::placeholder{
+    color: transparent;
+}
+
+#todo-button {
+    background-color: #505050;
+    font-size: 3rem;
+    border: 0;
+    color: white;
+}
+
+#todo-button:hover {
+    cursor:pointer;
+    color:black;
+    transition: all 0.1s ease-in;
+}
+
+ul {
+    padding-top: 3rem;
+    padding-left: 25%;
+    padding-right: 25%;
+    align-items: center;
+    justify-content: center;
+}
+
+li {
+    display: flex;
+    justify-content:space-between;
+    flex: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    list-style: none;
+    height: 4rem;
+    padding: 0.5rem;
+}
+
+#textArea {
+    background-color: black;
+    color: white;
+    font-size: 3rem;
+    width: 70%;
+    white-space: nowrap;
+    overflow: auto;
+
+}
+
+#buttons {
+    overflow:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#buttons #delete, #check, #update {
+    background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+    background-color: #646464;
+    border-radius: 0;
+    border: 0;
+    cursor: pointer;
+    color: white;
+    height: 10%;
+    width: 40%;
+    font-family: Arial;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    text-shadow: 0px -1px 0px #2b665e;
+}
+
+#buttons #delete:hover, #check:hover, #update:hover {
+    background: linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+    background-color: #6c7c7c;
+}
+
+#buttons #delete:active, #check:active, #update:active {
+    position: relative;
+    top: 0.1rem;
+}
