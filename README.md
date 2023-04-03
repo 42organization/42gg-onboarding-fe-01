@@ -21,4 +21,4 @@ HTML/CSS js기초공부
 <img width="50%" src="img/체크.png">
 
 ### 수정
-<img width="50%" src="img/수정.png"> &nbsp; <img width="50%" src="img/수정완료.png">
+<img width="50%" src="img/수정.png"><img width="50%" src="img/수정완료.png">
