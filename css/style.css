@@ -98,10 +98,6 @@ button {
     border: none;
 }
 
-/* .todo-item:hover.delBtn {
-    opacity: 1;
-} */
-
 .checkbox {
     width: 1.5rem;
     height: 1.5rem;
@@ -167,7 +163,7 @@ button {
 .edit-input {
     position: absolute;
     background: #FCF4B4;
-    border: thick couble #FCF4B4;
+    border: #FCF4B4;
     width: 390px;
     height: 2.8rem;
 }
