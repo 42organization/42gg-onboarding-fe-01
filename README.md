@@ -2,7 +2,7 @@
 
 ## 📝 ToDo List 만들기
 
-[⭐️ 배포 페이지 ⭐️](https://verysimpletodolist.netlify.app/)
+[✨ 배포 페이지 ✨](https://verysimpletodolist.netlify.app/)
 
 ## ✨ 주요 기능 소개
 
