@@ -13,6 +13,14 @@ input::placeholder {
 	font-family: 'Raleway', sans-serif;
 }
 
+li {
+	list-style-type: none;
+}
+
+i {
+	padding: 2%;
+}
+
 #login-input {
 	width: 30%;
 	height: 20px;
