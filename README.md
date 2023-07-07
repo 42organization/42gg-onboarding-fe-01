@@ -1,26 +1,28 @@
-# 42gg 프론트엔드 온보딩 1단계
+# TODO LIST 만들기
 
-## 공통 조건
+## 주요 기능
+### 시계 / 날씨
+------
+<img width="200" height="350" alt="main" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/692d444b-4dfb-4721-b43e-ba64c1af7329">
 
-- 온보딩 프로젝트는 개인 계정으로 fork하여 진행하고 PR로 제출합니다.
-- git / github / code 컨벤션은 42gg notion에 있는 자료를 적극 반영합니다.
-- 기본 기능 외 추가 기능, 디자인 구현은 자유입니다.
-- 최종 제출품에는 README 작성이 되있어야 합니다.([예시](https://github.com/42organization/42gg.client/blob/main/README.md))
+### 로그인
+------
+<img width="200" height="350" alt="login1" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/5e7019d3-6f83-4955-888c-ae31fd501c6e">
+<img width="200" height="350" alt="login2" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/6e1845d7-4e43-4397-aced-af4bf65f07d4">
 
-## todo list 만들기
+### todo 생성 / 체크
+------
+<img width="200" height="350" alt="create" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/b2320ba9-14a2-4bc7-86f7-587a996f4e91">
+<img width="200" height="350" alt="check" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/4da7328e-d08e-473c-a010-8acb0dca24dd">
 
-- (필수) Javascript, HTML, CSS
-- (필수) todo 생성(Create), 조회(Read) 기능 구현하기 (새로고침 고려 X)
-- (필수) todo 완료 상태 체크 기능 구현하기 (정렬은 선택사항) 
-- (선택) todo 수정(Update), 삭제(Delete) 기능 구현하기 (새로고침 고려 X)
-- (선택) 디자인 적용하기
-- (선택) 무료로 배포하기
+### todo 수정 / 삭제
+------
+<img width="200" height="350" alt="edit1" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/1c9587c5-46dd-4d1f-999b-75f5d4d33f27">
+<img width="200" height="350" alt="edit2" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/249d5cfe-a98e-4b4e-887e-4da1ca414232">
+<img width="200" height="350" alt="delete" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/81f3105a-687f-4811-915a-35c7587fd16c">
 
-## 참고
-
-- 데이터 관리는 하단의 방식 중 하나 선택하시면 됩니다.
-  - localstorage
-  - local server(예. [https://github.com/shal0mdave/todo-api.git](https://github.com/shal0mdave/todo-api.git), lowdb)
-  - mock api(예. [https://dummyjson.com/](https://dummyjson.com/))
-- todo list를 구현하기 위해 필요한 기능들을 미리 생각(그려보고)해보고, 구현해보세요.
-- 궁금한 사항은 issue에 등록해주세요.
+### 랜덤 배경 / 명언
+------
+<img width="200" height="350" alt="random1" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/50e56d0b-39dd-4a5f-b6eb-58c4aca5caf5">
+<img width="200" height="350" alt="random2" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/235a71aa-57fc-461b-ba8e-ec2d881905ef">
+<img width="200" height="350" alt="random3" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/105159293/0aa5849b-d84e-40aa-99a9-927b59fcc3c8">
