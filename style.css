@@ -2,11 +2,23 @@ body {
     text-align: center;
 }
 
-.btn-open-popup {
-    background-color: aqua;
+hr {
+    background: green;
+    height:3px;
+    border:0;
 }
 
-.ttt {
+.btn-open-popup {
+    background-color: aqua;
+    margin-left: 10px;
+}
+
+.todo-list {
+    background-color: rgb(0, 0, 0);
+    border-color: green;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    border-radius: 15px;
+    text-align: left;
     margin-left: 30%;
     margin-right: 30%;
 }
