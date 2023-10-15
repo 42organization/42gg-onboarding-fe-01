@@ -70,7 +70,7 @@ ul {
 }
 
 .list-wrapper {
-    /* overflow-y: auto; */
+    overflow-y: auto;
     height: 300px;
 }
 
@@ -78,7 +78,7 @@ ul {
     grid-template-columns: 1fr 1fr;
 }
 
-#todo-list li {
+.list-wrapper ul li {
     list-style-type: none;
     padding: 0px;
     margin: 0px;
@@ -87,23 +87,32 @@ ul {
     align-items: center; 
 }
 
-#todo-list li div{
+.list-wrapper ul li div{
     white-space: nowrap;
-    overflow: hidden;
+    overflow:hidden;
     text-overflow: ellipsis;
 }
 
-.btn-check-done {
+.btn-todo-done {
     width: 70%;
     height: 70%;
     border-radius: 3px;
     margin-left: 10%;
-    background-color:aquamarine;
+    background-color:greenyellow;
+}
+
+.btn-todo-undone {
+    width: 70%;
+    height: 70%;
+    border-radius: 3px;
+    margin-left: 10%;
+    background-color:rgb(214, 22, 22);
 }
 
 .btn-delete {
     width: 50px;
     margin-right: 100px;
+    color: Red;
     background: none; /* 배경 제거 */
     border: none; /* 테두리 제거 */
     padding: 0; /* 내부 간격 제거 */
