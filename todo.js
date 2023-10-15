@@ -10,10 +10,40 @@ function init() {
     todoForm.addEventListener("submit", createTodo);
 }
 
-function saveTodo(todo) {
+function makeDone(event){
+    event.preventDefault();
+    if (event.target.tagName === 'LI'){
+        const parent = event.target;
+        const index = todoList.findIndex((todo) => todo.id === Number(parent.id));
+        
+        todoList[index].isDone = !todoList[index].isDone;
+        if (todoList[index].isDone)
+            parent.classList.add("completed");
+        else
+            parent.classList.remove("completed");
+
+        localStorage.setItem(TODOLIST, JSON.stringify(todoList));
+    }
+
+    if (event.target.tagName === "SPAN" ) {
+        const parent = event.target.parentNode;
+        const index = todoList.findIndex((todo) => todo.id === Number(parent.id));
+        
+        todoList[index].isDone = !todoList[index].isDone;
+        if (todoList[index].isDone)
+            parent.classList.add("completed");
+        else
+            parent.classList.remove("completed");
+
+        localStorage.setItem(TODOLIST, JSON.stringify(todoList));
+    }
+}
+
+function saveTodo(todo, isDone) {
     const todoObj = {
         text: todo,
         id: todoList.length + 1,
+        isDone: isDone,
     }
     todoList.push(todoObj);
     localStorage.setItem(TODOLIST, JSON.stringify(todoList));
@@ -25,8 +55,9 @@ function loadTodoList(){
         const parseTodoList = JSON.parse(loadedTodoList);
         for(let todo of parseTodoList) {
             const {text} = todo;// const text = todo.text;
-            paintTodo(text);
-            saveTodo(text);
+            const {isDone} = todo;
+            paintTodo(text, isDone);
+            saveTodo(text, isDone);
         }
     }
 }
@@ -43,22 +74,61 @@ function createTodo(event){
 function delTodo(event){
     const { target:button } = event;
     const li = button.parentNode;
-    console.log(li);
-    console.log(todoList);
     todos.removeChild(li);
     todoList = todoList.filter((todo) => todo.id !== Number(li.id));
     localStorage.setItem(TODOLIST, JSON.stringify(todoList));
 }
 
-function paintTodo(todo) {
-    const li = document.createElement("li");
+function uptTodo(event){
+    const parent = event.target.parentNode;
+    const span = parent.querySelector('span');
+    const input = parent.querySelector('input');
+
+    if (input.style.display === 'none' || input.style.display === '') {
+        span.style.display = 'none';
+        input.style.display = 'inline-block';
+        input.value = span.textContent;
+    } else {
+        span.textContent = input.value;
+        span.style.display = 'inline-block';
+        input.style.display = 'none';
+
+        const parent = event.target.parentNode;
+        const index = todoList.findIndex((todo) => todo.id === Number(parent.id));
+        
+        todoList[index].text = input.value;
+        localStorage.setItem(TODOLIST, JSON.stringify(todoList));
+    }
+}
+
+function paintTodo(todo, isDone) {
+    const li = document.createElement("li")
     const span = document.createElement("span");
     const delButton = document.createElement("button");
-    delButton.innerText = "Del";
+    const uptButton = document.createElement("button");
+    const uptInput = document.createElement("input");
+        
+    li.addEventListener("click", makeDone);
     delButton.addEventListener("click", delTodo);
+    uptButton.addEventListener("click", uptTodo);
     span.innerText = todo;
+    delButton.innerText = "삭제";
+    uptButton.innerText = "수정";
+    
+    li.classList.add("todo-item");
+    span.classList.add("todo-text");
+    uptInput.classList.add("edit-input")
+    
     li.appendChild(span);
+    li.appendChild(uptInput);
     li.appendChild(delButton);
+    li.appendChild(uptButton);
     li.id = todoList.length + 1;
+
+    if (isDone) {
+        li.classList.add("completed");
+        span.classList.add("completed");
+    }
+
     todos.appendChild(li);
 }
