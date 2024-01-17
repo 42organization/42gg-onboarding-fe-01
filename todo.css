@@ -1,6 +1,18 @@
 #todo-main {
-    font-size: 30px; /* px means "pixels": the base font size is now 10 pixels high */
+    font-size: 50px; /* px means "pixels": the base font size is now 10 pixels high */
     font-family: "Open Sans", sans-serif; /* this should be the rest of the output you got from Google Fonts */
     text-align: center;
 }
+#todo-main {
+    text-align: center;
+}
 
+footer {
+    position:relative;
+    top: 90%;
+    text-align: center;
+    font-size: 13px;
+}
+
+#deleteButton{
+}

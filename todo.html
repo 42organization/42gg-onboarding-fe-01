@@ -10,24 +10,17 @@
     <link href="todo.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body id="body">
+    <label for="ftodo">Todo</label>
     <div id="todo-main">
-        <form>
-            <div>
-                <p> Todo </p>
-                <input id="Todo" type="text" name="text" />
-                <input type="submit" value="Send" />
-            </div>
-        </form>
-        <button>hello</button>
-        <h1>test</h1>
-        <p class="blue">blue class</p>
-        <p id="red">red id</p>
+            <input type="text" formaction="get" id="input" name="input">
+            <input type="submit" value="input" onclick="createTodo()">
     </div>
-    <script src="./todo.js"></script>
+    <div id="todo-list"> </div>
+    <div id="done-list"> </div>
+    <script src="todo.js"></script>
     <footer>
         made in juha
     </footer>
 </body>
-
 </html>
