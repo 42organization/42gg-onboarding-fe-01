@@ -14,5 +14,8 @@ footer {
     font-size: 13px;
 }
 
-#deleteButton{
+.output {
+    overflow: scroll;
+    margin: 1rem 0;
+    height: 200px;
 }
