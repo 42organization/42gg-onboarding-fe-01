@@ -90,6 +90,8 @@ function deleteTodo(id) {
   const key = id.slice(0, id.indexOf('-'));
   if (key === "") return;
   todoMap.delete(+key);
+  if (todoMap.size === 0)
+    localStorage.clear();
   render();
 }
 
@@ -165,10 +167,7 @@ fileInput.addEventListener("change", async () => {
   if (file) {
     let load = await file.text();
     let json = JSON.parse(load);
-    console.log(typeof (load))
     for (let [key, value] of Object.entries(json)) {
-      // console.log(key);
-      // console.log(value);
       todoMap.set(+key, value);
     }
   }
