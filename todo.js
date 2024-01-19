@@ -1,7 +1,6 @@
-let todoMap = new Map();
+const todoMap = new Map();
 
 function render() {
-
     const fragmentTodo = new DocumentFragment();
 
     let todoDiv = document.createElement('div');
@@ -116,13 +115,42 @@ function modifyTodo(id) {
     render();
 }
 
-const fileInput = document.querySelector("input[type=file]");
-const output = document.querySelector(".output");
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('download').addEventListener('click', ()=> {
+        let obj = {};
+        todoMap.forEach((value, key) => {
+            obj[key] = value;
+        });
+        const date = new Date();
+        downloadFile(JSON.stringify(obj), 
+                    date.getFullYear().toString() + (date.getMonth() + 1) + date.getDay().toString() + '.todo', 
+                    'text/plain'
+                    ); 
+    });
+
+    function downloadFile(content, fileName, fileType) {
+        const blob = new Blob([content], { type: fileType });
+
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+});
+
+const fileInput = document.querySelector("input[id=fileButton]");
 
 fileInput.addEventListener("change", async () => {
-  const [file] = fileInput.files;
+    const [file] = fileInput.files;
 
-  if (file) {
-    output.innerText = await file.text();
-  }
+    if (file) {
+        let load = await file.text();
+        let json = JSON.parse(load);
+        for (let [key, value] of Object.entries(json)) {
+            todoMap.set(+key, value);
+        }
+    }
+    render();
 });

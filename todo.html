@@ -11,15 +11,15 @@
 </head>
 
 <body id="body">
-    <label for="ftodo">Todo</label>
+    <header>Todo</header>
     <div id="todo-main">
         <div id="input-component">
                 <input type="text" formaction="get" id="input" name="input">
                 <input type="submit" value="input" onclick="createTodo()">
         </div>
     </div>
-    <input type="file" />
-    <div class="output"></div>
+    <input type="file" id="fileButton" name="file" accept=".todo"/>
+    <input type="button" id="download" name="download" value="Download to-do list"/>
     
     <script src="todo.js"></script>
     <footer>
