@@ -19,9 +19,19 @@ function render() {
 
   const fragmentTodo = new DocumentFragment();
 
+  let todoP = document.createElement('h1');
+  todoP.setAttribute("id", 'todoP');
+  todoP.append('해야 할 일');
+  fragmentTodo.appendChild(todoP);
+
   let todoDiv = document.createElement('div');
   todoDiv.setAttribute("id", 'todo-list');
   fragmentTodo.appendChild(todoDiv);
+
+  let doneP = document.createElement('h1');
+  doneP.setAttribute("id", 'doneP')
+  doneP.append("다 한 일");
+  fragmentTodo.appendChild(doneP);
 
   let doneDiv = document.createElement('div');
   doneDiv.setAttribute("id", 'done-list');
@@ -173,3 +183,5 @@ fileInput.addEventListener("change", async () => {
   }
   render();
 });
+
+render();
