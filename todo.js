@@ -125,9 +125,9 @@ function modifyTodoElement(id) {
 
 function modifyTodo(id) {
   if (id === '') return render();
-
-  const key = +id.slice(0, id.indexOf('-'));
   const input = document.getElementById('todo-element').value;
+  if (input === '') return render();
+  const key = +id.slice(0, id.indexOf('-'));
   let value = todoMap.get(key);
   value.todo = input;
   todoMap.set(key, value);
