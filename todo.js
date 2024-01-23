@@ -95,3 +95,20 @@ function addBtn() {
   updateLocalStorage();
   toInput.value = "";
 }
+
+function convertToPNG(element, filename) {
+  html2canvas(element).then(function (canvas) {
+    let link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = filename + ".png";
+    link.click();
+  });
+}
+
+function saveBtn() {
+  let contentContainer = document.querySelector(".contentcontainer");
+  console.log("HERE");
+  let filename = "contentcontainer_capture";
+
+  convertToPNG(contentContainer, filename);
+}
