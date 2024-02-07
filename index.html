@@ -1,0 +1,27 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>TodoList</title>
+  </head>
+  <body>
+    <div class="allcontainer">
+      <div class="contentcontainer">
+        <span class="title">TodoList</span>
+        <button onclick="saveBtn()" id="savebtn">Save</button>
+        <div class="inputandlist">
+          <div class="inputcontainer">
+            <input id="toinput" type="text" placeholder="New Task" size="40" />
+            <button onclick="addBtn()" class="btn">+</button>
+          </div>
+          <div class="ulcontainer">
+            <ul id="tolist"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="todo.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  </body>
+</html>

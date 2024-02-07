@@ -1,5 +1,10 @@
 # 42gg 프론트엔드 온보딩 1단계
 
+<div align=center>
+  
+<img height="100px" alt="42GG_neon_logo" src="https://github.com/42organization/42gg.client/assets/57761286/63f1e8b1-d254-407c-ae3d-9cf60166ed41">
+
+
 ## 공통 조건
 
 - 온보딩 프로젝트는 개인 계정으로 fork하여 진행하고 PR로 제출합니다.
@@ -15,6 +20,20 @@
 - (선택) todo 수정(Update), 삭제(Delete) 기능 구현하기 (새로고침 고려 X)
 - (선택) 디자인 적용하기
 - (선택) 무료로 배포하기
+
+## 초기화면
+<img width="500" alt="스크린샷 2024-01-18 오후 9 13 58" src="https://github.com/Pierrot-jang-pilkyu/ft_transcendence-front_end/assets/90916425/3dba9609-762a-477a-a584-24401860dd00">
+
+## 할일목록추가화면
+<img width="500" alt="스크린샷 2024-01-18 오후 9 17 38" src="https://github.com/Pierrot-jang-pilkyu/ft_transcendence-front_end/assets/90916425/53c760f9-df31-455c-8cb5-de8a0a003697">
+
+## 해결된 할일 처리(체크박스 체크)
+<img width="500" alt="image" src="https://github.com/Pierrot-jang-pilkyu/ft_transcendence-front_end/assets/90916425/fbe33858-966c-45cd-99e2-26e4cfb00b17">
+
+
+## 수정화면, 삭제
+
+<img width="500" alt="image" src="https://github.com/Pierrot-jang-pilkyu/ft_transcendence-front_end/assets/90916425/21f6b9ef-0992-4e66-a073-9a2f28ceb0a5">
 
 ## 참고
 
