@@ -12,7 +12,7 @@
 - (필수) Javascript, HTML, CSS
 - (필수) todo 생성(Create), 조회(Read) 기능 구현하기 (새로고침 고려 X)
 - (필수) todo 완료 상태 체크 기능 구현하기 (정렬은 선택사항) 
-- (선택) todo 수정(Update), 삭제(Delete) 기능 구현하기 (새로고침 고려 X)
+- (필수) todo 수정(Update), 삭제(Delete) 기능 구현하기 (새로고침 고려 X)
 - (선택) 디자인 적용하기
 - (선택) 무료로 배포하기
 
@@ -24,3 +24,5 @@
   - mock api(예. [https://dummyjson.com/](https://dummyjson.com/))
 - todo list를 구현하기 위해 필요한 기능들을 미리 생각(그려보고)해보고, 구현해보세요.
 - 궁금한 사항은 issue에 등록해주세요.
+- yoouyeon 님 배포 페이지| https://verysimpletodolist.netlify.app/
+- github io 배포방법 | https://velog.io/@mangojang/github-pages-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0
