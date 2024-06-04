@@ -29,6 +29,9 @@ h1 {
 }
 
 .todoListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 1000px;
   height: 800px;
   background-image: linear-gradient(
@@ -47,4 +50,53 @@ h1 {
     #5ffbf1
   );
   border-radius: 40px;
+  padding: 20px 10px;
+  gap: 40px;
+}
+
+.inputBox {
+  background-color: #f0ffff;
+  width: 800px;
+  height: 70px;
+  border-radius: 20px;
+  border: none;
+  padding: 0px 30px;
+  font-size: 30px;
+}
+
+.todoListItemsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 100%;
+  gap: 10px;
+  padding: 0px 30px;
+  overflow: scroll;
+}
+
+.todoListItemsWrapper {
+  display: flex;
+  align-items: center;
+  width: 760px;
+  height: 50px;
+  min-height: 50px;
+  font-size: 30px;
+  background-color: #f0ffff;
+  border-radius: 10px;
+  padding: 0px 20px;
+}
+
+.todoListItemsWrapper p {
+  flex-grow: 1;
+}
+
+.todoListItemsWrapper button {
+  margin-left: 10px;
+  width: 60px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  background-color: #f0ffff;
+  color: #d16ba5;
 }
