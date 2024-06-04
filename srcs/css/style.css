@@ -54,7 +54,7 @@ h1 {
   gap: 40px;
 }
 
-.inputBox {
+.todoListInputBox {
   background-color: #f0ffff;
   width: 800px;
   height: 70px;
@@ -87,7 +87,8 @@ h1 {
 }
 
 .todoListItemsWrapper p {
-  flex-grow: 1;
+  width: 620px;
+  text-overflow: ellipsis;
 }
 
 .todoListItemsWrapper button {
