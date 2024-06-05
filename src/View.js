@@ -13,7 +13,6 @@ export default class View {
 	}
 	getItem(){
 		var temp = this.input.value;
-		console.log(temp)
 		this.input.value = "";
 		return temp;
 	}
@@ -34,7 +33,6 @@ export default class View {
 		return (li);
 	}
 	updateItem(status, data , key){
-		console.log(data, this.list.children)
 		if (status === "add"){ //add{
 			this.list.appendChild(this.newItem(data));
 		}
@@ -44,11 +42,9 @@ export default class View {
 		else if (status === "toggle"){
 			const arr = Array.from(this.list.children);
 			arr.forEach(item => {
-				console.log("rv", item)
 				this.list.removeChild(item)
 			});
 			data.forEach(item => {
-				console.log("?")
 				this.list.appendChild(this.newItem(item));
 			})
 		}
@@ -83,7 +79,5 @@ export default class View {
 			case "stateCheckBtn" :
 				this.list.addEventListener("click", callback)
 		}
-	}
-	
-		
+	}	
 }

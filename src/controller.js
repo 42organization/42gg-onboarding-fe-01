@@ -14,7 +14,6 @@ export default class Controller{
 		this.view.updateItem("toggle", this.model.getItemByStatus(this.status));
 	}
 	addItem (value) {
-		console.log(this)
 		const newItem = this.model.addItem(value);
 		if (this.status !== "compelete")
 			this.view.updateItem("add", newItem);
@@ -22,24 +21,18 @@ export default class Controller{
 	deleteItem(event) {
 		if (event.target.className !== "todo-item-delete")	return ;
 		const Item = event.target.closest("li");
-		console.log(Item);
-		console.log(Item.getAttribute("key"))
 		this.view.updateItem("delete", Item);
 		this.model.deleteItem(Item.getAttribute("key"));
 	}
 	toggleByStatus(e) {
-		console.log(e.target)
 		this.status = e.target.getAttribute("key");
 		let data = this.model.getItemByStatus(this.status);
-		console.log(data);
 		this.view.updateItem("toggle", data, this.status);
 	}
 	changeStatus(e) {
-		console.log(e.target);
 		if (e.target.className !== "todo-item-complete") return;
 		let item = e.target.closest("li");
 		let status = e.target.checked;
-		console.log(status);
 		this.model.updateItemStatus(item.getAttribute("key"), status);
 		if (this.isMatchStatus(status)){
 			this.view.changeItemStatus(item, status);
