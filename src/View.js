@@ -20,18 +20,22 @@ export default class View {
 	newItem(data) {
 		const li = dc("li");
 		li.setAttribute("class", "todo-item");
-		li.setAttribute("class", data.status);
+		li.setAttribute("class", data.status ? "active" : "complete");
 		li.setAttribute("key", data.key);
 		li.innerHTML = `
 		<p>${data.name}</p>
 		<button class="todo-item-delete" key="${data.key}">X</button>
-		<input type="checkbox" class="todo-item-complete" key="${data.key}"></button>
 		`
+		const chk = dc("input");
+		chk.setAttribute("type", "checkbox");
+		chk.setAttribute("class", "todo-item-complete");
+		chk.checked = data.status;
+		li.appendChild(chk);
 		return (li);
 	}
 	updateItem(status, data , key){
 		console.log(data, this.list.children)
-		if (status === "add" && this.status !== "deactive"){ //add{
+		if (status === "add"){ //add{
 			this.list.appendChild(this.newItem(data));
 		}
 		else if (status === "delete"){
@@ -48,6 +52,12 @@ export default class View {
 				this.list.appendChild(this.newItem(item));
 			})
 		}
+	}
+	changeItemStatus(item, status, show){
+		const removeClass = status ? "complete" : "active";
+		const addClass = status ? "active" : "complete";
+		item.classList.remove(removeClass);
+		item.classList.add(addClass);
 	}
 	_bindEvent(selector, eventType, callback){
 		const targetlist = qsa(selector);
@@ -70,6 +80,8 @@ export default class View {
 			case "toggleByStatus" :
 				this.state_container.addEventListener("click", callback);
 				break ;
+			case "stateCheckBtn" :
+				this.list.addEventListener("click", callback)
 		}
 	}
 	
