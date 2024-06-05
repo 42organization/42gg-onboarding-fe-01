@@ -11,8 +11,9 @@ todoForm.addEventListener("submit", (e) => {
   inputBox.value = "";
   if (newTodo != "") {
     const newTodoItem = {
-      text: newTodo,
       id: Date.now(),
+      text: newTodo,
+      complete: false,
     };
     todoList.push(newTodoItem);
     createTodo(newTodoItem);
@@ -38,13 +39,15 @@ function saveLocalStorage() {
 }
 
 // todoItemWrapper안에 UI 넣는 함수
-function createTodoItemElement(todoItemWrapper, textContent) {
+function createTodoItemElement(todoItemWrapper, todoItem) {
   const todoItemText = document.createElement("p");
-  todoItemText.innerText = textContent;
+  if (todoItem.complete) todoItemText.classList.add("complete");
+  todoItemText.innerText = todoItem.text;
 
   const modifyButton = document.createElement("button");
   modifyButton.innerText = "MODIFY";
   modifyButton.addEventListener("click", (e) => {
+    e.stopPropagation();
     const targetWrapper = e.target.parentElement;
     modifyTodo(targetWrapper);
   });
@@ -52,6 +55,7 @@ function createTodoItemElement(todoItemWrapper, textContent) {
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "DELETE";
   deleteButton.addEventListener("click", (e) => {
+    e.stopPropagation();
     const targetWrapper = e.target.parentElement;
     deleteTodo(targetWrapper);
   });
@@ -71,8 +75,17 @@ function createTodo(todoItem) {
   todoItemWrapper.classList.add("todoListItemsWrapper");
   todoItemWrapper.id = todoItem.id;
 
-  createTodoItemElement(todoItemWrapper, todoItem.text);
+  createTodoItemElement(todoItemWrapper, todoItem);
   todoListItemsContainer.appendChild(todoItemWrapper);
+  todoItemWrapper.addEventListener("click", (e) => {
+    const todoItemText = todoItemWrapper.querySelector("p");
+    todoItemText.classList.toggle("complete");
+    const todoItem = todoList.find(
+      (item) => item.id === parseInt(todoItemWrapper.id)
+    );
+    todoItem.complete = !todoItem.complete;
+    saveLocalStorage();
+  });
 }
 
 // 수정(modify) 버튼 클릭 시, 작동되는 함수
@@ -102,14 +115,15 @@ function modifyTodo(todoItemWrapper) {
   todoItemWrapper.replaceChild(cancelButton, deleteButton);
 
   saveButton.addEventListener("click", (e) => {
-    e.preventDefault();
+    e.stopPropagation();
     saveTodo(todoItemWrapper);
   });
   modifyForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+    e.stopPropagation();
     saveTodo(todoItemWrapper);
   });
   cancelButton.addEventListener("click", (e) => {
+    e.stopPropagation();
     todoItemWrapper.replaceChild(todoItemText, modifyForm);
     todoItemWrapper.replaceChild(modifyButton, saveButton);
     todoItemWrapper.replaceChild(deleteButton, cancelButton);
@@ -137,5 +151,5 @@ function saveTodo(todoItemWrapper) {
   todoItem.text = modifyTextContent;
   saveLocalStorage();
   todoItemWrapper.innerHTML = "";
-  createTodoItemElement(todoItemWrapper, todoItem.text);
+  createTodoItemElement(todoItemWrapper, todoItem);
 }
