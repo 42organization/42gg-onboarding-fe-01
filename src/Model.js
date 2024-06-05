@@ -24,6 +24,7 @@ export default class Model {
 			console.error("cannot delete Item");
 	}
 	getItemByStatus(status){ // assume type comes in correctly
+		if (status === "all")	return this.data;
 		return (this.data.filter((item) => item.status === status))
 	}
 

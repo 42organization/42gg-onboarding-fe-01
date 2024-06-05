@@ -2,10 +2,10 @@ import { qs, qsa, dc } from "./utils.js"
 
 export default class View {
 	constructor() {
-		this.status = "all";
 		this.input_container = qs("#todo-input-container");
 		this.input = qs("#todo-input");
 		this.list = qs("#todo-list-ul");
+		this.state_container = qs("#state-container")
 		this.toggle_all = qs("#state-all")
 		this.toggle_active = qs("#state-active")
 		this.toggle_deactive = qs("#state-deactive")
@@ -17,20 +17,36 @@ export default class View {
 		this.input.value = "";
 		return temp;
 	}
-	updateItem(status, data){
-		console.log(data, this.list)
-		if (status === "add"){ //add{
-			const li = dc("li");
-			li.setAttribute("class", "todo-item");
-			li.setAttribute("key", data.key);
-			li.innerHTML = `
-			<p>${data.name}</p>
-			<button class="todo-item-delete" key="${data.key}">X</button>
-			`
-			this.list.appendChild(li);
+	newItem(data) {
+		const li = dc("li");
+		li.setAttribute("class", "todo-item");
+		li.setAttribute("class", data.status);
+		li.setAttribute("key", data.key);
+		li.innerHTML = `
+		<p>${data.name}</p>
+		<button class="todo-item-delete" key="${data.key}">X</button>
+		<input type="checkbox" class="todo-item-complete" key="${data.key}"></button>
+		`
+		return (li);
+	}
+	updateItem(status, data , key){
+		console.log(data, this.list.children)
+		if (status === "add" && this.status !== "deactive"){ //add{
+			this.list.appendChild(this.newItem(data));
 		}
 		else if (status === "delete"){
 			this.list.removeChild(data);
+		}
+		else if (status === "toggle"){
+			
+			for (const item of this.list.children){
+				console.log("rv", item)
+				this.list.removeChild(item)
+			};
+			data.forEach(item => {
+				console.log("?")
+				this.list.appendChild(this.newItem(item));
+			})
 		}
 	}
 	_bindEvent(selector, eventType, callback){
@@ -51,7 +67,8 @@ export default class View {
 				this.list.addEventListener("click", callback);
 				// this.list.appendChild(newItem(param)); this is render
 				break;
-			case "editItemStatus" :
+			case "toggleByStatus" :
+				this.state_container.addEventListener("click", callback);
 				break ;
 		}
 	}
