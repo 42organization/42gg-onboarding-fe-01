@@ -37,6 +37,30 @@ function saveLocalStorage() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(todoList));
 }
 
+// todoItemWrapper안에 UI 넣는 함수
+function createTodoItemElement(todoItemWrapper, textContent) {
+  const todoItemText = document.createElement("p");
+  todoItemText.innerText = textContent;
+
+  const modifyButton = document.createElement("button");
+  modifyButton.innerText = "MODIFY";
+  modifyButton.addEventListener("click", (e) => {
+    const targetWrapper = e.target.parentElement;
+    modifyTodo(targetWrapper);
+  });
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "DELETE";
+  deleteButton.addEventListener("click", (e) => {
+    const targetWrapper = e.target.parentElement;
+    deleteTodo(targetWrapper);
+  });
+
+  todoItemWrapper.appendChild(todoItemText);
+  todoItemWrapper.appendChild(modifyButton);
+  todoItemWrapper.appendChild(deleteButton);
+}
+
 // todo UI 생성하는 함수
 function createTodo(todoItem) {
   const todoListItemsContainer = document.querySelector(
@@ -114,27 +138,4 @@ function saveTodo(todoItemWrapper) {
   saveLocalStorage();
   todoItemWrapper.innerHTML = "";
   createTodoItemElement(todoItemWrapper, todoItem.text);
-}
-
-function createTodoItemElement(todoItemWrapper, textContent) {
-  const todoItemText = document.createElement("p");
-  todoItemText.innerText = textContent;
-
-  const modifyButton = document.createElement("button");
-  modifyButton.innerText = "MODIFY";
-  modifyButton.addEventListener("click", (e) => {
-    const targetWrapper = e.target.parentElement;
-    modifyTodo(targetWrapper);
-  });
-
-  const deleteButton = document.createElement("button");
-  deleteButton.innerText = "DELETE";
-  deleteButton.addEventListener("click", (e) => {
-    const targetWrapper = e.target.parentElement;
-    deleteTodo(targetWrapper);
-  });
-
-  todoItemWrapper.appendChild(todoItemText);
-  todoItemWrapper.appendChild(modifyButton);
-  todoItemWrapper.appendChild(deleteButton);
 }
