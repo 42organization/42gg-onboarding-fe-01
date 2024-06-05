@@ -8,8 +8,24 @@ export default class View {
 		this.todoInput = document.getElementById('todo-input');
 		this.todoList = document.querySelector('.todo-list');
 
-		this.addEventListeners();
+		this.addSubmitEventListeners();
 	}
+
+  createTodoItem({id, text, completed, checked}) {
+    const item = document.createElement('li');
+    item.setAttribute('data-id', id);
+    item.className = `item ${completed}`;
+
+    item.innerHTML = `
+        <div class="item-line">
+            <input class="toggle" type="checkbox" ${checked}>
+            <label>${text}</label>
+            <button class="destroy">X</button>
+        </div>
+    `;
+
+    return item;
+  }
 
 	addTodo(todoText) {
 		this.model.add(todoText);
@@ -31,25 +47,23 @@ export default class View {
 		this.updateView();
 	}
 
-	updateView() {
-		this.todoList.innerHTML = '';
+  updateView() {
+    this.todoList.innerHTML = '';
 
-		this.model.todoList.forEach(todo => {
-			const todoHTML = createTodoItem({
-				id: todo.id,
-				text: todo.text,
-				completed: todo.completed ? 'completed' : '',
-				checked: todo.completed ? 'checked' : '',
-				index: todo.id
-			});
-			this.todoList.innerHTML += todoHTML;
-		});
+    this.model.todoList.forEach(todo => {
+        const todoItem = this.createTodoItem({
+            id: todo.id,
+            text: todo.text,
+            completed: todo.completed ? 'completed' : '',
+            checked: todo.completed ? 'checked' : '',
+        });
+        this.todoList.appendChild(todoItem);
+    });
 
-		this.addTodoEventListeners();
-	}
+    this.addEventListeners();
+  }
 
-
-	addEventListeners()
+	addSubmitEventListeners()
 	{
 		this.todoForm.addEventListener('submit', (e) => {
 			e.preventDefault();
@@ -62,59 +76,63 @@ export default class View {
 		});
 	}
 
-	addTodoEventListeners() {
-		this.todoList.querySelectorAll('.destroy').forEach(button => {
-			button.addEventListener('click', (e) => {
-				const id = parseInt(e.target.closest('li').dataset.id);
+  addEventListeners() {
+    this.addDeleteListeners();
+    this.addEditListeners();
+    this.addToggleListeners();
+  }
 
-				this.deleteTodo(id);
-			});
-		});
+  addDeleteListeners() {
+    this.todoList.querySelectorAll('.destroy').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const id = parseInt(e.target.closest('li').dataset.id);
+            this.deleteTodo(id);
+        });
+    });
+  }
 
-		this.todoList.querySelectorAll('label').forEach(label => {
+  addEditListeners() {
+    this.todoList.querySelectorAll('label').forEach(label => {
+        label.addEventListener('dblclick', (e) => {
+            this.makeLabelEditable(label);
+        });
+    });
+  }
 
-			label.addEventListener('dblclick', (e) => {
-				const id = parseInt(e.target.closest('li').dataset.id);
-				label.contentEditable = true;
+  makeLabelEditable(label) {
+    const id = parseInt(label.closest('li').dataset.id);
+    const originalContent = label.innerText;
 
-				// label.classList.add('editable');
-				// 엔터 아니면 다른 부분 누르면 적용
+    label.contentEditable = true;
+    label.focus();
 
-			});
+    const finishEdit = () => {
+        const newText = label.innerText.trim();
+        if (newText && newText !== originalContent) {
+            this.editTodo(id, newText);
+        }
+        label.contentEditable = false;
+        label.removeEventListener('blur', finishEdit);
+    };
 
-			label.addEventListener('change', (e) => {
-				console.log('change');
-				label.contentEditable = false;
-			});
+    label.addEventListener('blur', finishEdit);
 
-		});
+    label.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const newText = label.innerText.trim();
+            if (!newText) label.innerText = originalContent;
+            label.blur();
+        }
+    });
+  }
 
-		this.todoList.querySelectorAll('.toggle').forEach(check =>{
-			check.addEventListener('change', (e)=>
-			{
-				const id = parseInt(e.target.closest('li').dataset.id);
-				this.toggleTodo(id);
-
-			});
-		});
-
-	}
-}
-
-function createElement(tag, className) {
-	const element = document.createElement(tag);
-	if (className) element.classList.add(className);
-	return element;
-}
-
-function createTodoItem({ id, text, completed, checked, index }) {
-	return `
-	<li data-id="${id}" class="item ${completed}">
-	    <div class="item-line">
-	        <input class="toggle" type="checkbox" ${checked}>
-	        <label>${text}</label>
-	        <button class="destroy">X</button>
-	    </div>
-	</li>
-	`;
+  addToggleListeners() {
+      this.todoList.querySelectorAll('.toggle').forEach(check => {
+          check.addEventListener('change', (e) => {
+              const id = parseInt(e.target.closest('li').dataset.id);
+              this.toggleTodo(id);
+          });
+      });
+  }
 }
