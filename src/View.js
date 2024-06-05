@@ -8,7 +8,7 @@ export default class View {
 		this.state_container = qs("#state-container")
 		this.toggle_all = qs("#state-all")
 		this.toggle_active = qs("#state-active")
-		this.toggle_deactive = qs("#state-deactive")
+		this.toggle_complete = qs("#state-complete")
 
 	}
 	getItem(){
