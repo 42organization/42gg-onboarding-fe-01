@@ -10,14 +10,14 @@ export default class Model {
 		{
 			name : name,
 			status: "active",
-			key : this.length,
+			key : this.length++,
 		}) 	// updatedata
 		return this.data[this.data.length - 1];
 	}
 	deleteItem(key) {
-		console.log(this.data);
-		console.log(this.data.find(item => item.key === key));
-		if (this.data.find(item => item.key === key)){
+		console.log(this.data, key);
+		console.log(this.data.find(item => item.key.toString() === key));
+		if (this.data.find(item => item.key.toString() === key)){
 			delete this.data[key];
 		}
 		else

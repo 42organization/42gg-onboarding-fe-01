@@ -4,7 +4,7 @@ import View from "./View.js"
 
 const _Model = new Model();
 const _View = new View();
-const Todo = new Controller (_View, _Model);
+const Todo = new Controller ( _View, _Model);
 
 Todo.addItem ("default");
 console.log("loaded");
