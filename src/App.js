@@ -8,10 +8,11 @@ export default function App() {
     // this.template = new Template();
     // this.view = new View(this.template);
 
-	this.model = new Model();
-    this.view = new View();
-    this.controller = new Controller(this.model, this.view);
+	  this.model = new Model();
+    this.view = new View(this.model);
+    // this.controller = new Controller(this.model, this.view);
 
 }
 
-
+const app = new App();
+window.app = app;

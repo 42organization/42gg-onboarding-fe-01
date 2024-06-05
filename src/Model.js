@@ -9,8 +9,8 @@ export default class Model {
 		  id: this.nextId++,
 		  text: todoText,
 		  completed: false,
-		}
-		this.todoList.push(item)
+		};
+		this.todoList.push(item);
 	}
 
 	edit(id, newText) {
@@ -22,8 +22,9 @@ export default class Model {
 
 	delete(id) {
 		const index = this.todoList.findIndex(item => item.id === id);
+
 		if (index !== -1) {
-				this.todoList.splice(index, 1);
+			this.todoList.splice(index, 1);
 		}
 	}
 
