@@ -12,7 +12,7 @@ export default class Model {
 		const newData = 
 		{
 			name : name,
-			status: false,
+			isComplete: false,
 			key : this.data.length,
 		} 	// updatedata
 		this.data.push(newData);
@@ -30,11 +30,11 @@ export default class Model {
 	getItemByStatus(status){ // assume type comes in correctly
 		if (status === "all")	return this.data;
 		status = status === "active" ? false : true;
-		return (this.data.filter((item) => item.status === status))
+		return (this.data.filter((item) => item.isComplete === status))
 	}
 	updateItemStatus (key, status) {
 		let item = this.data.find((i) => i.key.toString() === key);
-		item.status = status;
+		item.isComplete = status;
 		this._updateStorage();
 	}
 }
