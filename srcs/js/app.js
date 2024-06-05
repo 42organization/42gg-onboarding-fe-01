@@ -100,8 +100,10 @@ function modifyTodo(todoItemWrapper) {
   // modify UI 만들기
   const modifyForm = document.createElement("form");
   const modifyInput = document.createElement("input");
+  modifyInput.type = "text";
   modifyInput.classList.add("modifyInput");
   modifyInput.value = todoTextContent;
+  modifyInput.maxLength = 30;
   modifyForm.appendChild(modifyInput);
 
   const saveButton = document.createElement("button");
