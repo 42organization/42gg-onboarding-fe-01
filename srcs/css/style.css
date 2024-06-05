@@ -100,4 +100,14 @@ h1 {
   font-size: 20px;
   background-color: #f0ffff;
   color: #d16ba5;
+  cursor: pointer;
+}
+
+.modifyInput {
+  width: 620px;
+  height: 100%;
+  background-color: #f0ffff;
+  border: none;
+  font-size: 30px;
+  padding: 0 0;
 }
