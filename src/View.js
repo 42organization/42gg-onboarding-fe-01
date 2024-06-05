@@ -33,6 +33,7 @@ export default class View {
 	bindEvent(selector, eventType, callback){
 		const targetlist = qsa(selector);
 		targetlist.length > 0 && targetlist.forEach(target => target.addEventListener(eventType, callback));
+		
 	}
 		
 }

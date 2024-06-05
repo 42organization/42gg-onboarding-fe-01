@@ -13,8 +13,6 @@ export default class Controller{
 			this.addItem();
 			console.log("SDF") 
 		})
-		// this.view.bindEvent("addItem", this.addItem);
-		// this.view.bindEvent("deleteItem", this.deleteItem);
 	}
 	addItem (value) {
 		value = value || this.view.getItem("input");

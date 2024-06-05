@@ -1,6 +1,6 @@
 const eventType = {
-	addItem, //아이템 생성
-	deleteItem, // 아이템 제거
+	addItem, //아이템 생성*
+	deleteItem, // 아이템 제거*
 	setItemStatus, //아이템 상태 변경
 	editItemMode, // 아이템 내용 변경 가능상태
 	editItemSave, //아이템 내용 변경 저장
