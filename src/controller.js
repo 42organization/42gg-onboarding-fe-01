@@ -9,6 +9,9 @@ export default class Controller{
 		this.view.bindEvent("deleteBtn", (event) => this.deleteItem(event));
 		this.view.bindEvent("toggleByStatus", (event) => this.toggleByStatus(event));
 		this.view.bindEvent("stateCheckBtn", (event) => this.changeStatus(event));
+		if (!this.model.getItemByStatus("all").length)
+			this.addItem("default");
+		this.view.updateItem("toggle", this.model.getItemByStatus(this.status));
 	}
 	addItem (value) {
 		console.log(this)
