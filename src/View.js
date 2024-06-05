@@ -38,11 +38,11 @@ export default class View {
 			this.list.removeChild(data);
 		}
 		else if (status === "toggle"){
-			
-			for (const item of this.list.children){
+			const arr = Array.from(this.list.children);
+			arr.forEach(item => {
 				console.log("rv", item)
 				this.list.removeChild(item)
-			};
+			});
 			data.forEach(item => {
 				console.log("?")
 				this.list.appendChild(this.newItem(item));
