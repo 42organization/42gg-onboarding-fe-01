@@ -1,59 +1,72 @@
 export default class View {
 	constructor(viewModel) {
-		this.app = document.getElementById('root');
+    this.app = document.getElementById('root');
 
-		this.todoForm = document.getElementById('todo-form');
-		this.todoInput = document.getElementById('todo-input');
-		this.todoList = document.querySelector('.todo-list');
+    this.todoForm = document.getElementById('todo-form');
+    this.todoInput = document.getElementById('todo-input');
+    this.todoList = document.querySelector('.todo-list');
 
     this.viewModel = viewModel;
     this.viewModel.todoListChanged = this.updateView; // callback
 
-		this.addSubmitEventListeners();
+    this.addSubmitEventListeners();
+    this.init();
 	}
 
-  createTodoItem({id, text, completed, checked}) {
-    const item = document.createElement('li');
-    item.setAttribute('data-id', id);
-    item.className = `item ${completed}`;
+  init() {
+    const todoList = this.viewModel.todoList;
+    this.updateView(todoList);
+  }
 
-    item.innerHTML = `
-        <div class="item-line">
-            <input class="toggle" type="checkbox" ${checked}>
-            <label>${text}</label>
-            <button class="destroy">X</button>
-        </div>
+
+  createTodoItem({ id, text, completed, checked }) {
+    return`
+      <li data-id="${id}" class="item ${completed}">
+          <div class="item-line">
+              <input class="toggle" type="checkbox" ${checked}>
+              <label>${text}</label>
+              <button class="destroy">X</button>
+          </div>
+      </li>
     `;
-
-    return item;
   }
 
   updateView = (todoList) => {
-    this.todoList.innerHTML = '';
+    let checked = '';
+    let unchecked = '';
 
     todoList.forEach(todo => {
         const todoItem = this.createTodoItem({
-            id: todo.id,
-            text: todo.text,
-            completed: todo.completed ? 'completed' : '',
-            checked: todo.completed ? 'checked' : '',
-        });
-        this.todoList.appendChild(todoItem);
+          id: todo.id,
+          text: todo.text,
+          completed: todo.completed ? 'completed' : '',
+          checked: todo.completed ? 'checked' : '',
+      });
+
+        if (todo.completed) {
+            checked += todoItem;
+        } else {
+            unchecked += todoItem;
+        }
     });
+
+    this.todoList.innerHTML = unchecked + checked;
 
     this.addEventListeners();
   }
 
+
 	addSubmitEventListeners()
 	{
-		this.todoForm.addEventListener('submit', (e) => {
-			e.preventDefault();
-			const todoText = this.todoInput.value.trim();
+    this.todoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-			if (todoText !== '') {
+      const todoText = this.todoInput.value.trim();
+
+      if (todoText !== '') {
         this.viewModel.addTodo(todoText);
-				this.todoInput.value = '';
-			}
+        this.todoInput.value = '';
+      }
 		});
 	}
 
@@ -82,14 +95,14 @@ export default class View {
 
   makeLabelEditable(label) {
     const id = parseInt(label.closest('li').dataset.id);
-    const originalContent = label.innerText;
+    const oldText = label.innerText;
 
     label.contentEditable = true;
     label.focus();
 
     const finishEdit = () => {
         const newText = label.innerText.trim();
-        if (newText && newText !== originalContent) {
+        if (newText && newText !== oldText) {
             this.viewModel.editTodo(id, newText);
         }
         label.contentEditable = false;
@@ -101,8 +114,9 @@ export default class View {
     label.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
+
             const newText = label.innerText.trim();
-            if (!newText) label.innerText = originalContent;
+            if (!newText) label.innerText = oldText;
             label.blur();
         }
     });
