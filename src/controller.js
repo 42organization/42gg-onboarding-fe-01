@@ -43,5 +43,11 @@ export default class Controller{
 		if (this.status === "all" || (this.status === "active" && !status ) || (this.status === "active" && status)) return true;
 		return false;
 	}
+	editItemModeOn(e){
+		if (e.target.className !== "todo-item") return;
+		this.editItem = e.target;
+		
+		e.parentNode.replaceChild("") 
+	}
 }
 

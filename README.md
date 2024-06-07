@@ -5,6 +5,20 @@
 - 함수 재사용성 높이기(실패)
 - 로직 명확하게 분리하기(부분적 성공)
 
+### eventtype
+```js
+const eventType = {
+	addItem, //아이템 생성*
+	deleteItem, // 아이템 제거*
+	setItemStatus, //아이템 상태 변경
+	editItemMode, // 아이템 내용 변경 가능상태
+	editItemSave, //아이템 내용 변경 저장
+	switchView, //화면보여주기 - all / active / disable
+	dragItemMode, //아이템 드래그를 통한 위치 변경 상태
+	dragItemSave,
+}
+```
+
 ## MVC 패턴에 따른 전체 구조
 컨트롤러, 뷰, 모델로 구분하여 각자 클래스를 만들었습니다.
 컨트롤러 클래스에서 전체 렌더/ 조정을 담당합니다.
