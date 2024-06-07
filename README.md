@@ -1,28 +1,37 @@
 # 42gg 프론트엔드 온보딩 1단계
 
-## 공통 조건
+## 구현 목표
+- MVC 패턴을 적용한 TODO-list 만들기
+- 함수 재사용성 높이기(실패)
+- 로직 명확하게 분리하기(부분적 성공)
 
-- 온보딩 프로젝트는 개인 계정으로 fork하여 진행하고 PR로 제출합니다.
-- git / github / code 컨벤션은 42gg notion에 있는 자료를 적극 반영합니다.
-- 기본 기능 외 추가 기능, 디자인 구현은 자유입니다.
-- 최종 제출품에는 README 작성이 되있어야 합니다.([예시](https://github.com/42organization/42gg.client/blob/main/README.md))
+## MVC 패턴에 따른 전체 구조
+컨트롤러, 뷰, 모델로 구분하여 각자 클래스를 만들었습니다.
+컨트롤러 클래스에서 전체 렌더/ 조정을 담당합니다.
 
-## todo list 만들기
+### 1. 객체 초기화
+#### 모델
+생성 시 로컬스토리지 값을 확인하고 가져옵니다.
+####  뷰
+생성 시 현재 보여줄 item status만 가지고 있습니다.
+#### 컨트롤러 
+만들어진 모델, 뷰 객체를 받아 초기화합니다.
+- 값이 없을 경우 "default" 값을 넣어줍니다.
+- 뷰 객체로 함수를 넘기고, 뷰 객체는 이를 받아 이벤트리스너에 콜백으로 등록합니다(바인딩)
+이때 감싸준 함수는 객체 클로저를 만들어, this가 컨트롤러 객체에 바인딩된 상태를 유지시킵니다. 
+```js
+this.view.bindEvent("deleteBtn", (event) => this.deleteItem(event));
+this.view.bindEvent("deleteBtn", this.deleteItem);
+```
+### 2. 렌더
+기본 index.html에 노드구조가 들어가 있습니다. 
 
-- (필수) Javascript, HTML, CSS
-- (필수) todo 생성(Create), 조회(Read) 기능 구현하기 (새로고침 고려 X)
-- (필수) todo 완료 상태 체크 기능 구현하기 (정렬은 선택사항) 
-- (필수) todo 수정(Update), 삭제(Delete) 기능 구현하기 (새로고침 고려 X)
-- (선택) 디자인 적용하기
-- (선택) 무료로 배포하기
+컨트롤러 생성자는 이벤트리스너를 등록한 후 마지막으로 
+모델 객체를 불러와 `getItemsByStatus` 
+뷰에 아이템을 토스합니다. `updateItems`
 
-## 참고
+- 모든 아이템 토글 이벤트는 전체 삭제 후 재등록으로 이뤄집니다.
+따로 diff 로직을 넣는 등의 효율은 추구하지 않았습니다...
 
-- 데이터 관리는 하단의 방식 중 하나 선택하시면 됩니다.
-  - localstorage
-  - local server(예. [https://github.com/shal0mdave/todo-api.git](https://github.com/shal0mdave/todo-api.git), lowdb)
-  - mock api(예. [https://dummyjson.com/](https://dummyjson.com/))
-- todo list를 구현하기 위해 필요한 기능들을 미리 생각(그려보고)해보고, 구현해보세요.
-- 궁금한 사항은 issue에 등록해주세요.
-- yoouyeon 님 배포 페이지| https://verysimpletodolist.netlify.app/
-- github io 배포방법 | https://velog.io/@mangojang/github-pages-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0
+- 아이템 상태 변경/삭제 시에는 키값을 통해 추적합니다.
+
