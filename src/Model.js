@@ -36,11 +36,13 @@ export default class Model {
 	getItemByStatus(status){ // assume type comes in correctly
 		if (status === "all")	return this.data;
 		status = status === "active" ? false : true;
-		return (this.data.filter((item) => item.isComplete === status))
+		return (this.data.filter((item) => item && item.isComplete === status))
 	}
 	updateItemStatus (key, status) {
-		let item = this.data.find((i) => i.key.toString() === key);
-		item.isComplete = status;
+		this.data.forEach((i) => {
+			if (i && i.key && i.key.toString() === key)
+				i.isComplete = status;
+			} );
 		this._updateStorage();
 	}
 }
