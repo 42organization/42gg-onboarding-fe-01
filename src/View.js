@@ -1,4 +1,4 @@
-import { qs, qsa, dc } from "./utils.js"
+import { qs, dc } from "./utils.js"
 
 export default class View {
 	constructor() {
@@ -55,11 +55,6 @@ export default class View {
 		item.classList.remove(removeClass);
 		item.classList.add(addClass);
 	}
-	_bindEvent(selector, eventType, callback){
-		const targetlist = qsa(selector);
-		targetlist.length > 0 && targetlist.forEach(target => target.addEventListener(eventType, callback));
-		
-	}
 	bindEvent(type, callback, param){ //일종의 데이터 초기화
 		// type: 이벤트 타입
 		switch (type) {
@@ -71,7 +66,6 @@ export default class View {
 				break;
 			case "deleteBtn" :
 				this.list.addEventListener("click", callback);
-				// this.list.appendChild(newItem(param)); this is render
 				break;
 			case "toggleByStatus" :
 				this.state_container.addEventListener("click", callback);

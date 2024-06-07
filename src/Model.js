@@ -2,7 +2,13 @@ export default class Model {
 	data;
 	length;
 	constructor() {
-		var strData = JSON.parse(localStorage.getItem("data"))
+		var strData = [];
+		try {
+			strData = JSON.parse(localStorage.getItem("data"))
+		}
+		catch (e) {
+			console.log("data is not valid, inited to default")
+		}
 		this.data = strData && strData.length ? strData : [];
 	}
 	_updateStorage(){
