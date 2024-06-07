@@ -16,6 +16,38 @@
 - (선택) 디자인 적용하기
 - (선택) 무료로 배포하기
 
+
+## 구현 요약
+- MVVM 패턴을 적용하여 Model, View, ViewModel 로 분리
+- todoList를 localStorage에 저장하여 데이터 관리
+
+## 기능
+
+1. 생성(Create) 및 조회
+- '할 일을 입력해주세요.' input에 입력 후 `enter` 또는 `+` 버튼을 눌러 생성
+
+  <img width="400" alt="image" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/74870834/b0c71a1c-9470-430a-a92f-3233f2e84c8a">
+
+2. 완료 상태 체크
+- 체크 박스를 클릭하여 완료 상태 체크
+- 완료된 항목은 완료되지 않은 항목 아래로 이동
+
+  <img width="400" alt="image" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/74870834/164d98e5-fd4f-456e-a0bc-411ec7727af3">
+
+3. 수정(Update)
+- 리스트의 항목을 더블클릭하여 수정 가능
+
+  <div>
+  <img width="400" alt="image" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/74870834/a69fee65-33bc-4911-a3ae-8b4ec5dcce76">
+  <img width="400" alt="image" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/74870834/84a36828-e1c7-4c72-9ff2-676b6c5e231a">
+ </div>
+
+4. 삭제(Delete)
+- 각 항목의 오른쪽 `X` 버튼을 클릭하여 삭제 
+
+  <img width="400" alt="image" src="https://github.com/42organization/42gg-onboarding-fe-01/assets/74870834/1b9c429d-7cce-4e3c-b85e-5aeca776039c">
+
+
 ## 참고
 
 - 데이터 관리는 하단의 방식 중 하나 선택하시면 됩니다.
