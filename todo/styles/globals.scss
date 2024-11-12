@@ -1,0 +1,95 @@
+@mixin center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin textBtn($hover-color) {
+	border: 1.5px solid #4a696c;
+	height: 25px;
+	&:hover {
+		background-color: $hover-color;
+	}
+}
+
+body {
+	margin: 0;
+	color: #0f0f0f;
+	background-color: #ffffff;
+	padding-top: 200px;
+}
+
+#__next {
+	@include center;
+}
+
+.todoMain {
+	background-color: #a0ca68;
+	padding: 40px;
+	width: 550px;
+	height: 200px;
+}
+
+.SideBar {
+	flex-direction: column;
+	float: left;
+	margin: 0 50px 0 0;
+}
+
+.SideBar .menu {
+	padding: 0 0 20px 0;
+}
+
+main {
+	float: right;
+	flex-direction: column;
+	@include center;
+	text-align: center;
+}
+
+.todoForm {
+	margin: 0;
+	width: 400px;
+}
+
+.todoInput {
+	margin: 0 0 10px 0;
+	width: 100%;
+}
+
+.todoInput input {
+	border: none;
+	outline: none;
+	padding: 0;
+	height: 30px;
+	color: #1b3815;
+	line-height: 1.2;
+	text-align: center;
+	width: 100%;
+}
+
+.todoList, .deleteTodoList, .doneTodoList {
+	display: flex;
+	flex-direction: column;
+}
+
+.line {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 0 8px 0;
+}
+
+.delBtn {
+	@include textBtn(red);
+}
+
+.restoreBtn {
+	@include textBtn(blue);
+}
+
+a {
+	color: black;
+	text-decoration-line: none;
+	//font-weight: bold;
+}

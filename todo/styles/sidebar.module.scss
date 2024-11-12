@@ -1,0 +1,14 @@
+.active {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+}
+
+.inactive {
+    transform: translateX(-1000%);
+    transition: transform 0.3s ease;
+}
+
+.icon {
+    position: fixed;
+    top: 0;
+}
