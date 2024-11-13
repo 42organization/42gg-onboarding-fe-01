@@ -5,7 +5,6 @@ import { lastTodoId } from "@/types/todoId";
 
 export default function useTodoList<T>() {
     const [todos, setTodos] = useLocalStorage<Todo[]>
-    const [todoId, setTodoId] = useRecoilState(lastTodoId);
 
     
 

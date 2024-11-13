@@ -3,18 +3,21 @@ import { useRecoilState } from "recoil";
 import { lastTodoId } from "@/types/todoId";
 import { Todo } from '@/types/todo'
 
-export default function useLocalStorage<Todo>(key: string, initialValue: Todo) {
- const [state, setState] = useState<Todo[]>();
-
-  useEffect(() => {
-	if (typeof window !== 'undefined') {
+function getSavedValue<Todo>(key: string, initialValue: Todo) {
+	if (typeof window !== "undefined") {
 		const item = localStorage.getItem(key);
-		if (item && item !== 'undefined') {
-			const todos : Todo[] = JSON.parse(item);
-			setState(todos);
-		}
+    if (item) {
+      const todos = JSON.parse(item);
+    }
+		return item ? JSON.parse(item) : initialValue;
 	}
-}, []);
+	return initialValue;
+  }
+
+export default function useLocalStorage<Todo>(key: string, initialValue: Todo) {
+  const [state, setState] = useState<Todo[]>(() => {
+    return getSavedValue(key, initialValue);
+  });
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

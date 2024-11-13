@@ -1,73 +1,34 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import styles from 'styles/index.module.scss';
 import { Todo, TODOS, DELS, DONES } from '@/types/todo';
-
-//recoils(전역변수같은)
+import useLocalStorage from '@/hooks/useLocalStorage';
+import { lastTodoId } from '@/types/todoId';
+import { useRecoilState } from 'recoil';
 
 export default function Home() {
-	const [todoInput, setTodoInput] = useState<string>(''); // 입력값
-	const [todoList, setTodoList] = useState<Todo[]>([]); // 전체 목록
-	const [todoId, setTodoId] = useState<number>(0); // 할 일 ID
-	const [deletedTodoList, setDeletedTodoList] = useState<Todo[]>([]); // 삭제 목록
-	const [doneTodoList, setDoneTodoList] = useState<Todo[]>([]); //완료 목록
+
+  const [todoInput, setTodoInput] = useState<string>(''); // 입력값
+  const [lastId, setLastId] = useRecoilState(lastTodoId);
+	const [todoList, setTodoList] = useLocalStorage<Todo[]>(TODOS, []); // 전체 목록
+	const [deletedTodoList, setDeletedTodoList] = useLocalStorage<Todo[]>(DELS, []); // 삭제 목록
+	const [doneTodoList, setDoneTodoList] = useLocalStorage<Todo[]>(DONES, []); //완료 목록
+  
 
 	// 입력값을 처리하는 함수
 	const handleTodoInput = (text: ChangeEvent<HTMLInputElement>) => {
 		setTodoInput(text.target.value);
 	};
 
-	// 페이지 로드 시 로컬 스토리지에서 저장된 할 일 목록을 불러오는 useEffect
-	useEffect(() => {
-		const savedTodo = localStorage.getItem(TODOS);
-		if (savedTodo) {
-			const todos: Todo[] = JSON.parse(savedTodo);
-			setTodoList(todos);
-			const lastId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
-			setTodoId(lastId);
-		}
-
-		const deletedTodo = localStorage.getItem(DELS);
-		if (deletedTodo) {
-			const delTodos : Todo[] = JSON.parse(deletedTodo);
-			setDeletedTodoList(delTodos);
-		}
-
-		const doneTodo = localStorage.getItem(DONES);
-		if (doneTodo) {
-			const doneTodos : Todo[] = JSON.parse(doneTodo);
-			setDoneTodoList(doneTodos);
-		}
-	}, []);
-
-	// todoList가 변경될 때마다 로컬 스토리지에 저장하는 useEffect
-	useEffect(() => {
-		if (todoList) {
-			localStorage.setItem(TODOS, JSON.stringify(todoList));
-		}
-	}, [todoList]);
-
-	useEffect(() => {
-		if (deletedTodoList) {
-			localStorage.setItem(DELS, JSON.stringify(deletedTodoList));
-		}
-	}, [deletedTodoList]);
-
-	useEffect(() => {
-		if (doneTodoList) {
-			localStorage.setItem(DONES, JSON.stringify(doneTodoList));
-		}
-	}, [doneTodoList]);
-
 	// 할 일 추가 함수
 	const addTodo = () => {
 		const newTodo: Todo = {
-			id: todoId,
+			id: lastId + 1,
 			text: todoInput,
 			done: false,
 		};
 
 		setTodoList((prev) => [...prev, newTodo]);
-		setTodoId(todoId + 1);
+		setLastId(newTodo.id);
 		setTodoInput(''); // 입력값 초기화
 	};
 
