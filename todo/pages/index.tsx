@@ -1,7 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import styles from 'styles/index.module.scss';
-import SideBar from '@/components/SideBar';
-import Todo from '@/utils/todo';
+import { Todo, TODOS, DELS, DONES } from '@/types/todo';
 
 //recoils(전역변수같은)
 
@@ -12,10 +11,6 @@ export default function Home() {
 	const [deletedTodoList, setDeletedTodoList] = useState<Todo[]>([]); // 삭제 목록
 	const [doneTodoList, setDoneTodoList] = useState<Todo[]>([]); //완료 목록
 
-	const TODO = 'todos';
-	const DELTODO = "deletedTodos";
-	const DONETODO = "doneTodos";
-
 	// 입력값을 처리하는 함수
 	const handleTodoInput = (text: ChangeEvent<HTMLInputElement>) => {
 		setTodoInput(text.target.value);
@@ -23,7 +18,7 @@ export default function Home() {
 
 	// 페이지 로드 시 로컬 스토리지에서 저장된 할 일 목록을 불러오는 useEffect
 	useEffect(() => {
-		const savedTodo = localStorage.getItem(TODO);
+		const savedTodo = localStorage.getItem(TODOS);
 		if (savedTodo) {
 			const todos: Todo[] = JSON.parse(savedTodo);
 			setTodoList(todos);
@@ -31,13 +26,13 @@ export default function Home() {
 			setTodoId(lastId);
 		}
 
-		const deletedTodo = localStorage.getItem(DELTODO);
+		const deletedTodo = localStorage.getItem(DELS);
 		if (deletedTodo) {
 			const delTodos : Todo[] = JSON.parse(deletedTodo);
 			setDeletedTodoList(delTodos);
 		}
 
-		const doneTodo = localStorage.getItem(DONETODO);
+		const doneTodo = localStorage.getItem(DONES);
 		if (doneTodo) {
 			const doneTodos : Todo[] = JSON.parse(doneTodo);
 			setDoneTodoList(doneTodos);
@@ -47,19 +42,19 @@ export default function Home() {
 	// todoList가 변경될 때마다 로컬 스토리지에 저장하는 useEffect
 	useEffect(() => {
 		if (todoList) {
-			localStorage.setItem(TODO, JSON.stringify(todoList));
+			localStorage.setItem(TODOS, JSON.stringify(todoList));
 		}
 	}, [todoList]);
 
 	useEffect(() => {
 		if (deletedTodoList) {
-			localStorage.setItem(DELTODO, JSON.stringify(deletedTodoList));
+			localStorage.setItem(DELS, JSON.stringify(deletedTodoList));
 		}
 	}, [deletedTodoList]);
 
 	useEffect(() => {
 		if (doneTodoList) {
-			localStorage.setItem(DONETODO, JSON.stringify(doneTodoList));
+			localStorage.setItem(DONES, JSON.stringify(doneTodoList));
 		}
 	}, [doneTodoList]);
 
@@ -127,3 +122,4 @@ export default function Home() {
 			</div>
 	);
 }
+

@@ -1,21 +1,20 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import Todo from '@/utils/todo';
+import { Todo, TODOS, DELS, DONES } from '@/types/todo';
+import useLocalStorage from '@/hooks/useLocalStorage';
+
 
 export default function Done() {
     const [todoList, setTodoList] = useState<Todo[]>([]); // 전체 목록
     const [doneTodoList, setDoneTodoList] = useState<Todo[]>([]);
-    
-    const TODO = "todos";
-    const DONETODO = "doneTodos";
 
     useEffect(() => {
-        const savedTodo = localStorage.getItem(TODO);
+        const savedTodo = localStorage.getItem(TODOS);
 		if (savedTodo) {
 			const todos: Todo[] = JSON.parse(savedTodo);
 			setTodoList(todos);
 		}
 
-		const doneTodo = localStorage.getItem(DONETODO);
+		const doneTodo = localStorage.getItem(DONES);
 		if (doneTodo) {
 			const doneTodos : Todo[] = JSON.parse(doneTodo);
 			setDoneTodoList(doneTodos);
@@ -24,13 +23,13 @@ export default function Done() {
 
     useEffect(() => {
 		if (todoList) {
-			localStorage.setItem(TODO, JSON.stringify(todoList));
+			localStorage.setItem(TODOS, JSON.stringify(todoList));
 		}
 	}, [todoList]);
 
 	useEffect(() => {
 		if (doneTodoList) {
-			localStorage.setItem(DONETODO, JSON.stringify(doneTodoList));
+			localStorage.setItem(DONES, JSON.stringify(doneTodoList));
 		}
 	}, [doneTodoList]);
 
