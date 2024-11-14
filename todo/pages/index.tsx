@@ -6,9 +6,9 @@ import { nanoid } from 'nanoid';
 export default function Home() {
 
 	const [todoInput, setTodoInput] = useState<string>(''); // 입력값
-	const [todoList, setTodoList] = useLocalStorage<Todo[]>(TODOS, []); // 전체 목록
-	const [deletedTodoList, setDeletedTodoList] = useLocalStorage<Todo[]>(DELS, []); // 삭제 목록
-	const [doneTodoList, setDoneTodoList] = useLocalStorage<Todo[]>(DONES, []); //완료 목록
+	const [todoList, setTodoList] = useLocalStorage(TODOS); // 전체 목록
+	const [deletedTodoList, setDeletedTodoList] = useLocalStorage(DELS); // 삭제 목록
+	const [doneTodoList, setDoneTodoList] = useLocalStorage(DONES); //완료 목록
   
 
 	const handleTodoInput = (text: ChangeEvent<HTMLInputElement>) => {
@@ -29,30 +29,30 @@ export default function Home() {
 
 	// Enter 키로 todo 추가
 	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') {
+		if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
 			addTodo();
 		}
 	};
 
 	// todo 삭제
-	const deleteTodo = (id: number) => {
-		setTodoList((prev) => prev.filter(todo => todo.id !== id));
-		
+	const deleteTodo = (id: string) => {
 		const delTodo = todoList.find(todo => todo.id === id);
 		if (delTodo) {
 			setDeletedTodoList((prev) => [...prev, delTodo]);
 		}
+
+		setTodoList((prev) => prev.filter(todo => todo.id !== id));
 	};
 
 	// 체크박스 상태 변화 함수 -> 완료 목록으로 이동
-	const updateCheckbox = (id: number) => {
-		setTodoList((prev) => prev.filter(todo => todo.id !== id));
-		
+	const updateCheckbox = (id: string) => {
 		const doneTodo = todoList.find(todo => todo.id === id);
 		if (doneTodo) {
 			doneTodo.done = !doneTodo.done;
 			setDoneTodoList((prev) => [...prev, doneTodo]);
 		}
+		
+		setTodoList((prev) => prev.filter(todo => todo.id !== id));
 	}
 
 	return (

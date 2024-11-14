@@ -3,10 +3,10 @@ import { Todo, TODOS, DELS, DONES } from '@/types/todo';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 export default function Trash() {
-	const [todoList, setTodoList] = useLocalStorage<Todo[]>(TODOS, []); // 전체 목록
-	const [deletedTodoList, setDeletedTodoList] = useLocalStorage<Todo[]>(DELS, []); // 삭제 목록	
+	const [todoList, setTodoList] = useLocalStorage(TODOS); // 전체 목록
+	const [deletedTodoList, setDeletedTodoList] = useLocalStorage(DELS); // 삭제 목록	
 
-	const restoreTodo = (id: number) => {
+	const restoreTodo = (id: string) => {
 		setDeletedTodoList((prev) => prev.filter(todo => todo.id !== id));
 		
 		const restoreTodo = deletedTodoList.find(todo => todo.id === id);

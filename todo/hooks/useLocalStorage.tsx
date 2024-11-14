@@ -1,38 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { Todo } from '@/types/todo';
 
-function getSavedValue<T>(key: string, initialValue: T[]): T[] {
-	if (typeof window !== "undefined") {
-		const item = localStorage.getItem(key);
-		return item ? JSON.parse(item) : initialValue;
-	}
-	return initialValue;
-}
+export default function useLocalStorage(key: string): [Todo[], Dispatch<SetStateAction<Todo[]>>]{
+  const [isClient, setIsClient] = useState(false); 
+  const [data, setData] = useState<Todo[]>([]);
 
-export default function useLocalStorage<T>(key: string, initialValue: T[]) {
-	const [state, setState] = useState<T[]>(() => {
-		return getSavedValue(key, initialValue);
-	});
+  // 클라이언트가 렌더링되었을 때 isClient 플래그를 true로 설정
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			localStorage.setItem(key, JSON.stringify(state));
-		}
-	}, [state]);
+  useEffect(() => {
+    // 첫 렌더링시 로컬스토리지 데이터 가져오기
+    if (isClient) {
+      const item = localStorage.getItem(key);
+      setData(item ? JSON.parse(item) : []);
+    }
+  }, [isClient]);
 
-	// 클라이언트 환경 체크
-	const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    // 로컬스토리지 데이터 삭제-추가시 작동
+    if (isClient) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+  }, [isClient, data]);
 
-	useEffect(() => {
-		setIsClient(true);
-	}, []);
-
-	// 클라이언트에서만 상태 반환
-	if (isClient) {
-		return [state, setState] as const;
-	}
-
-	// 서버 렌더링 환경에서는 초기값 반환
-	return [initialValue, setState] as const;
+  return [data, setData];
 }
 
 

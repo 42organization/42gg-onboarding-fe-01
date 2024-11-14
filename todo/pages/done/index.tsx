@@ -4,11 +4,11 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 
 
 export default function Done() {
-    const [todoList, setTodoList] = useLocalStorage<Todo[]>(TODOS, []); // 전체 목록
-	const [deletedTodoList, setDeletedTodoList] = useLocalStorage<Todo[]>(DELS, []); // 삭제 목록
-	const [doneTodoList, setDoneTodoList] = useLocalStorage<Todo[]>(DONES, []); //완료 목록
+    const [todoList, setTodoList] = useLocalStorage(TODOS); // 전체 목록
+	const [deletedTodoList, setDeletedTodoList] = useLocalStorage(DELS); // 삭제 목록
+	const [doneTodoList, setDoneTodoList] = useLocalStorage(DONES); //완료 목록
   
-	const deleteTodo = (id: number) => {
+	const deleteTodo = (id: string) => {
 		setDoneTodoList((prev) => prev.filter(todo => todo.id !== id));
 		
 		const delTodo = doneTodoList.find(todo => todo.id === id);
@@ -17,8 +17,8 @@ export default function Done() {
 		}
 	};
 
-	const restoreTodo = (id: number) => {
-        setDoneTodoList((prev) => prev.filter(todo => todo.id !== id));
+	const restoreTodo = (id: string) => {
+		setDoneTodoList((prev) => prev.filter(todo => todo.id !== id));
 		
 		const restoreTodo = doneTodoList.find(todo => todo.id === id);
 		if (restoreTodo) {
