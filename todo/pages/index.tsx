@@ -1,44 +1,40 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import styles from 'styles/index.module.scss';
 import { Todo, TODOS, DELS, DONES } from '@/types/todo';
 import useLocalStorage from '@/hooks/useLocalStorage';
-import { lastTodoId } from '@/types/todoId';
-import { useRecoilState } from 'recoil';
+import { nanoid } from 'nanoid';
 
 export default function Home() {
 
-  const [todoInput, setTodoInput] = useState<string>(''); // 입력값
-  const [lastId, setLastId] = useRecoilState(lastTodoId);
+	const [todoInput, setTodoInput] = useState<string>(''); // 입력값
 	const [todoList, setTodoList] = useLocalStorage<Todo[]>(TODOS, []); // 전체 목록
 	const [deletedTodoList, setDeletedTodoList] = useLocalStorage<Todo[]>(DELS, []); // 삭제 목록
 	const [doneTodoList, setDoneTodoList] = useLocalStorage<Todo[]>(DONES, []); //완료 목록
   
 
-	// 입력값을 처리하는 함수
 	const handleTodoInput = (text: ChangeEvent<HTMLInputElement>) => {
 		setTodoInput(text.target.value);
 	};
 
-	// 할 일 추가 함수
+	// todo 추가
 	const addTodo = () => {
 		const newTodo: Todo = {
-			id: lastId + 1,
+			id: nanoid(),
 			text: todoInput,
 			done: false,
 		};
 
 		setTodoList((prev) => [...prev, newTodo]);
-		setLastId(newTodo.id);
-		setTodoInput(''); // 입력값 초기화
+		setTodoInput('');
 	};
 
+	// Enter 키로 todo 추가
 	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
 			addTodo();
 		}
 	};
 
-	// 할 일 삭제 함수
+	// todo 삭제
 	const deleteTodo = (id: number) => {
 		setTodoList((prev) => prev.filter(todo => todo.id !== id));
 		

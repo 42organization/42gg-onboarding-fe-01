@@ -4,34 +4,18 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 
 
 export default function Done() {
-    const [todoList, setTodoList] = useState<Todo[]>([]); // 전체 목록
-    const [doneTodoList, setDoneTodoList] = useState<Todo[]>([]);
-
-    useEffect(() => {
-        const savedTodo = localStorage.getItem(TODOS);
-		if (savedTodo) {
-			const todos: Todo[] = JSON.parse(savedTodo);
-			setTodoList(todos);
+    const [todoList, setTodoList] = useLocalStorage<Todo[]>(TODOS, []); // 전체 목록
+	const [deletedTodoList, setDeletedTodoList] = useLocalStorage<Todo[]>(DELS, []); // 삭제 목록
+	const [doneTodoList, setDoneTodoList] = useLocalStorage<Todo[]>(DONES, []); //완료 목록
+  
+	const deleteTodo = (id: number) => {
+		setDoneTodoList((prev) => prev.filter(todo => todo.id !== id));
+		
+		const delTodo = doneTodoList.find(todo => todo.id === id);
+		if (delTodo) {
+			setDeletedTodoList((prev) => [...prev, delTodo]);
 		}
-
-		const doneTodo = localStorage.getItem(DONES);
-		if (doneTodo) {
-			const doneTodos : Todo[] = JSON.parse(doneTodo);
-			setDoneTodoList(doneTodos);
-		}
-	}, []);
-
-    useEffect(() => {
-		if (todoList) {
-			localStorage.setItem(TODOS, JSON.stringify(todoList));
-		}
-	}, [todoList]);
-
-	useEffect(() => {
-		if (doneTodoList) {
-			localStorage.setItem(DONES, JSON.stringify(doneTodoList));
-		}
-	}, [doneTodoList]);
+	};
 
 	const restoreTodo = (id: number) => {
         setDoneTodoList((prev) => prev.filter(todo => todo.id !== id));
@@ -50,7 +34,7 @@ export default function Done() {
 					<div className="line" key={it.id}>
 						<input type="checkbox" checked={it.done} onChange={() => restoreTodo(it.id)} />
 						<span>{it.text}</span>
-						<button className="delBtn" onClick={() => {}}>삭제</button>
+						<button className="delBtn" onClick={() => deleteTodo(it.id)}>삭제</button>
 					</div>
 				))}
 			</div>
